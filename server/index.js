@@ -1,16 +1,30 @@
 const express = require('express');
-require('./services/passport');
-
-
+const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
 const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io')
+const keys = require('./config/keys');
+require('./models/User');
+require('./services/passport');
 
-const PUBLICPATH = path.join(__dirname, '../client/public');
-const PORT = process.env.PORT || 5000;
+mongoose.connect(keys.mongoURI);
+
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server);
+const PORT = process.env.PORT || 5000;
+
+/*
+ * Cookie configuration for authentication
+ */
+app.use(cookieSession({
+  maxAge: 30 * 24 * 60 * 60 * 1000,
+  keys: [keys.cookieKey]
+}))
+app.use(passport.initialize());
+app.use(passport.session());
 
 /*
  * Handle routes
