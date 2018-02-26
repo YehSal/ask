@@ -18,6 +18,8 @@ const PORT = process.env.PORT || 5000;
 
 /*
  * Cookie configuration for authentication
+ * @cookieSession pulls data from cookie
+ * @passport pulls the user id out of the cookie data
  */
 app.use(cookieSession({
   maxAge: 30 * 24 * 60 * 60 * 1000,
