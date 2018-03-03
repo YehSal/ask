@@ -58,4 +58,4 @@ typings/
 .env
 
 # keys
-keys.js
+dev.js
