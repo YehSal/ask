@@ -9,16 +9,24 @@ module.exports = app => {
   }));
 
   /**
-   * Handel request when user is redirected back to our website
+   * Handle request when user is redirected back to our website
+   * Redirect to /classes after passport authenticates and google approves
+   * the code
    */
-  app.get('/auth/google/callback', passport.authenticate('google'));
+  app.get(
+    '/auth/google/callback',
+    passport.authenticate('google'),
+    (req, res) => {
+      res.redirect('/classes');
+    }
+  );
 
   /*
-   * Log out route
+   * Logout route
    */
   app.get('/api/logout', (req, res) => {
     req.logout();
-    res.send(req.user);
+    res.redirect('/');
   });
 
   /*
