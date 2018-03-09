@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
+import { compose } from 'recompose';
 
 import AppBar from 'material-ui/AppBar';
 import LoginButton from './LoginButton';
@@ -24,12 +26,7 @@ class Header extends Component {
   }
 
   handleTitleClick() {
-    console.log(this)
-    return(
-      <Link to={this.props.auth ? '/courses' : '/'}>
-        QueueMe
-      </Link>
-    );
+    return this.props.history.push('/courses');
   }
 
   render() {
@@ -59,4 +56,7 @@ function mapStateToProps(state) {
   return { auth: state.auth };
 }
 
-export default connect(mapStateToProps)(Header);
+/*
+ * Compose makes it easy to hook up several HoC's by just chaining them
+ */
+export default compose(connect(mapStateToProps), withRouter)(Header);

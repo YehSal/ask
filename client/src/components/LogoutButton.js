@@ -2,10 +2,6 @@
 import React, { Component } from 'react';
 import FlatButton from 'material-ui/FlatButton';
 
-const style = {
-  margin: 12,
-};
-
 class LogoutButton extends Component {
   static muiName = 'FlatButton';
 
