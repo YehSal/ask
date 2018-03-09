@@ -7,7 +7,7 @@ const http = require('http');
 const socketIO = require('socket.io')
 const keys = require('./config/keys');
 require('./models/User');
-require('/models/Class');
+require('./models/Course');
 require('./services/passport');
 
 mongoose.connect(keys.mongoURI);
@@ -34,7 +34,7 @@ app.use(passport.session());
  * require will return a function that we just pass app to as an argument
  */
 require('./routes/authRoutes')(app);
-require('./routes/classRoutes')(app);
+require('./routes/courseRoutes')(app);
 
 server.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`);

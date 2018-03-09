@@ -13,7 +13,6 @@ passport.deserializeUser((id, done) => {
     .then(user => done(null, user));
 });
 
-
 /*
  * Create a new user if there is no existing user with the same profile ID
  */

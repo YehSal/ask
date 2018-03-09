@@ -26,7 +26,7 @@ class Header extends Component {
   handleTitleClick() {
     console.log(this)
     return(
-      <Link to={this.props.auth ? '/classes' : '/'}>
+      <Link to={this.props.auth ? '/courses' : '/'}>
         QueueMe
       </Link>
     );

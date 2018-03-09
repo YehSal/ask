@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 
-const Class = mongoose.model('classes');
+const Course = mongoose.model('courses');
 
 module.exports = app => {
-  app.post('/api/classes', requireLogin, (req, res) => {
+  app.post('/api/courses', requireLogin, (req, res) => {
     const { title, duration, password } = req.body;
 
-    const class = new Class({
+    const course = new Course({
       title,
       duration,
       password,
       _user: req.user.id
     });
 
-    class.save();
+    course.save();
   });
 };

@@ -7,7 +7,7 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import Header from './Header';
 import Landing from './Landing';
 const Dashboard = () => <h2>Dashboard</h2>
-const ClassesNew = () => <h2>ClassesNew</h2>
+const CoursesNew = () => <h2>CoursesNew</h2>
 
 class App extends Component {
   componentDidMount() {
@@ -22,8 +22,8 @@ class App extends Component {
             <div>
               <Header />
               <Route exact path="/" component={Landing} />
-              <Route exact path="/classes" component={Dashboard} />
-              <Route exact path="/classes/new" component={ClassesNew} />
+              <Route exact path="/courses" component={Dashboard} />
+              <Route exact path="/courses/new" component={CoursesNew} />
             </div>
           </BrowserRouter>
         </div>

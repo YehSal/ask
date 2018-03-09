@@ -10,14 +10,14 @@ module.exports = app => {
 
   /**
    * Handle request when user is redirected back to our website
-   * Redirect to /classes after passport authenticates and google approves
+   * Redirect to /courses after passport authenticates and google approves
    * the code
    */
   app.get(
     '/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
-      res.redirect('/classes');
+      res.redirect('/courses');
     }
   );
 
