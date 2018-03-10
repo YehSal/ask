@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+var randomstring = require('randomstring');
 const QuestionSchema = require('./Question');
 
 /*
@@ -8,11 +9,17 @@ const QuestionSchema = require('./Question');
  */
 const courseSchema = new Schema({
   title: String,
-  duration: Date,
-  expired: Boolean,
-  password: String,
+  expirationDate: Date,
+  password: {
+    type: String,
+    default: randomstring.generate({
+      length: 7,
+      readable: true,
+      charset: 'alphanumeric'
+    })
+  },
   questions: [QuestionSchema],
-  _user: { type: Schema.Types.ObjectId, ref: 'User' },
+  _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 mongoose.model('courses', courseSchema);
