@@ -1,15 +1,20 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
-var randomstring = require('randomstring');
+const randomstring = require('randomstring');
+const moment = require('moment');
 const QuestionSchema = require('./Question');
 
 /*
  * TODO: still need to figure out how to keep track of the students who logged
  * into the course so they aren't allowed to vote on one question more than once
+ * TODO: remove default expiration date and require the user to determine it
  */
 const courseSchema = new Schema({
   title: String,
-  expirationDate: Date,
+  expirationDate: {
+    type: Date,
+    default: moment(new Date()).add(2, 'm').toDate()
+  },
   password: {
     type: String,
     default: randomstring.generate({

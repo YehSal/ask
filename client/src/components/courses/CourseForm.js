@@ -3,6 +3,10 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import CourseField from './CourseField';
 
+
+/*
+ * TODO: Add a field to pick the hours and minutes for the course duration
+ */
 class CourseForm extends Component {
   renderFields() {
     return(
@@ -11,12 +15,6 @@ class CourseForm extends Component {
           label="Course Title"
           type="text"
           name="courseTitle"
-          component={CourseField}
-        />
-        <Field
-          label="Course Duration"
-          type="date"
-          name="courseDuration" 
           component={CourseField}
         />
       </div>
