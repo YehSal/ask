@@ -15,4 +15,5 @@ class LoginButton extends Component {
     );
   }
 }
+
 export default LoginButton;

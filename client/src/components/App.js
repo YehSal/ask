@@ -3,11 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-
 import Header from './Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
-const CoursesNew = () => <h2>CoursesNew</h2>
+import CourseNew from './courses/CourseNew';
 
 class App extends Component {
   componentDidMount() {
@@ -23,7 +22,7 @@ class App extends Component {
               <Header />
               <Route exact path="/" component={Landing} />
               <Route exact path="/courses" component={Dashboard} />
-              <Route exact path="/courses/new" component={CoursesNew} />
+              <Route exact path="/courses/new" component={CourseNew} />
             </div>
           </BrowserRouter>
         </div>

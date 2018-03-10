@@ -10,7 +10,6 @@ const Dashboard = () => {
   return (
     <div>
       Dashboard
-
       <FloatingActionButton style={style} href='/courses/new'>
         <ContentAdd />
       </FloatingActionButton>
