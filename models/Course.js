@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { Schema } = mongoose;
+const QuestionSchema = require('./Question');
 const randomstring = require('randomstring');
 const moment = require('moment');
-const QuestionSchema = require('./Question');
 
 /*
  * TODO: still need to figure out how to keep track of the students who logged
