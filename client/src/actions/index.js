@@ -6,3 +6,7 @@ export const fetchUser = () => async dispatch => {
 
   dispatch({ type: FETCH_USER, payload: res.data });
 };
+
+export const createCourse = values => {
+  return { type: 'create_course' };
+};
