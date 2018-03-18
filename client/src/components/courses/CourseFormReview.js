@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { compose } from 'recompose';
 import RaisedButton from 'material-ui/RaisedButton';
 import * as actions from '../../actions';
 
@@ -7,7 +9,7 @@ const style = {
   margin: 12
 };
 
-const CourseFormReview = ({ onCancel,  formValues, createCourse }) => {
+const CourseFormReview = ({ onCancel, formValues, createCourse, history }) => {
   return (
     <div>
       <h2>Please confirm your entries</h2>
@@ -27,7 +29,7 @@ const CourseFormReview = ({ onCancel,  formValues, createCourse }) => {
         label="Submit"
         primary={true}
         style={style}
-        onClick={() => createCourse(formValues)}
+        onClick={() => createCourse(formValues, history)}
       />
     </div>
   );
@@ -37,4 +39,4 @@ function mapStateToProps(state) {
   return { formValues: state.form.courseForm.values };
 }
 
-export default connect(mapStateToProps, actions)(CourseFormReview);
+export default compose(connect(mapStateToProps, actions), withRouter)(CourseFormReview);

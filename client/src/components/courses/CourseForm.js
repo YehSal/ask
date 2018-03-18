@@ -5,7 +5,6 @@ import CourseField from './CourseField';
 import RaisedButton from 'material-ui/RaisedButton';
 import Done from 'material-ui/svg-icons/action/done';
 import Close from 'material-ui/svg-icons/navigation/close';
-import FontIcon from 'material-ui/FontIcon';
 import { Link } from 'react-router-dom';
 
 /*
