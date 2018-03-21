@@ -10,7 +10,7 @@ class CourseList extends Component {
   renderCourses() {
     return this.props.courses.map(course => {
       return (
-        <div>
+        <div key={course._id}>
           <h5>{course.title}</h5>
         </div>
       );

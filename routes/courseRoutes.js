@@ -10,6 +10,12 @@ module.exports = app => {
     res.send(courses);
   });
 
+  app.get('/api/course/:id', requireLogin, async (req, res) => {
+    const course = await Course.find({ _id: req.body._id });
+
+    res.send(course);
+  });
+
   app.post('/api/courses', requireLogin, async(req, res) => {
     const { courseTitle } = req.body;
     const course = new Course({
