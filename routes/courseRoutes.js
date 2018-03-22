@@ -27,16 +27,16 @@ module.exports = app => {
       await course.save();
       const user = await req.user.save();
 
-      res.send(user);
+      res.send(course);
     } catch (err) {
       res.status(422).send(err);
     }
   });
 
   app.post('/api/course/:id/questions', requireLogin, async(req, res) => {
-    const { values, courseID } = req.body.params;
+    const { values } = req.body.params;
+    const courseID  = req.params.id;
     const course = await Course.findById(courseID);
-
     const question = {
       body: values.questionBody
     };

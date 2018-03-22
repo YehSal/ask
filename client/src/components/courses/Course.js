@@ -20,7 +20,8 @@ class Course extends Component {
   }
 
   componentDidMount() {
-    const courseID = this.props.history.location.state.courseID;
+    // const courseID = this.props.match.params.id;
+    const courseID = this.props.location.state? this.props.location.state.courseID : this.props.match.params.id
     this.props.findCourse(courseID);
     this.props.fetchQuestions(courseID);
   }
@@ -90,7 +91,6 @@ class Course extends Component {
   }
 
   render() {
-    console.log(this.props.questions);
     return(
       <div>
         {this.renderCourse()}

@@ -31,10 +31,9 @@ export const findCourse = id => async dispatch => {
 
 //TODO: CourseID pass in using string interpolation
 export const submitQuestion = (values, courseID, fetchQuestions) => async dispatch => {
-  const res = await axios.post('/api/course/:id/questions', {
+  const res = await axios.post(`/api/course/${courseID}/questions`, {
     params: {
-      values,
-      courseID
+      values
     }
   });
 
