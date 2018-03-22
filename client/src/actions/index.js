@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_COURSES, FIND_COURSE, SUBMIT_QUESTION } from './types';
+import { FETCH_USER, FETCH_COURSES, FIND_COURSE, SUBMIT_QUESTION, FETCH_QUESTIONS } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -29,7 +29,8 @@ export const findCourse = id => async dispatch => {
   dispatch({ type: FIND_COURSE, payload: res.data });
 };
 
-export const submitQuestion = (values, courseID) => async dispatch => {
+//TODO: CourseID pass in using string interpolation
+export const submitQuestion = (values, courseID, fetchQuestions) => async dispatch => {
   const res = await axios.post('/api/course/:id/questions', {
     params: {
       values,
@@ -37,5 +38,14 @@ export const submitQuestion = (values, courseID) => async dispatch => {
     }
   });
 
+  fetchQuestions(courseID);
   dispatch({ type: SUBMIT_QUESTION, payload: res.data });
+};
+
+export const fetchQuestions = courseID => async dispatch => {
+  const res = await axios.get(`/api/course/${courseID}`, {
+    params: { courseID }
+  });
+
+  dispatch({ type: FETCH_QUESTIONS, payload: res.data.questions });
 }

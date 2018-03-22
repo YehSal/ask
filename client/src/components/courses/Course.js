@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { findCourse, submitQuestion } from '../../actions';
+import { findCourse, submitQuestion, fetchQuestions } from '../../actions';
 import QuestionField from '../questions/QuestionField';
 import Done from 'material-ui/svg-icons/action/done';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -17,12 +17,12 @@ class Course extends Component {
     super(props);
 
     this.state = { showPassword: true };
-    // this.submitQuestion = this.submitQuestion.bind(this);
   }
 
   componentDidMount() {
     const courseID = this.props.history.location.state.courseID;
     this.props.findCourse(courseID);
+    this.props.fetchQuestions(courseID);
   }
 
   renderPassword() {
@@ -47,13 +47,15 @@ class Course extends Component {
   }
 
   renderQuestions() {
-    return this.props.course.questions.map(question => {
-      return (
-        <div key={question._id}>
-          <h5>{question.body}</h5>
-        </div>
-      );
-    });
+    if (this.props.questions) {
+      return this.props.questions.map(question => {
+        return (
+          <div key={question._id}>
+            <h5>{question.body}</h5>
+          </div>
+        );
+      });
+    }
   }
 
   renderCourse() {
@@ -88,10 +90,14 @@ class Course extends Component {
   }
 
   render() {
+    console.log(this.props.questions);
     return(
       <div>
         {this.renderCourse()}
-        <form onSubmit={this.props.handleSubmit(() => this.props.submitQuestion(this.props.formValues, this.props.course._id))}>
+        <form onSubmit={this.props.handleSubmit(() => {
+          this.props.submitQuestion(this.props.formValues, this.props.course._id, this.props.fetchQuestions);
+          // this.props.fetchQuestions(this.props.course._id);
+        })}>
           {this.renderFields()}
           <RaisedButton
             label="Submit Question"
@@ -110,11 +116,12 @@ function mapStateToProps(state) {
   return {
     course: state.course,
     question: state.question,
-    formValues: state.form.questionForm ? state.form.questionForm.values : false
+    formValues: state.form.questionForm ? state.form.questionForm.values : false,
+    questions: state.questions
   };
 }
 
 export default reduxForm({
   form: 'questionForm',
   destroyOnUnmount: false
-})(connect(mapStateToProps, { findCourse, submitQuestion })(Course))
+})(connect(mapStateToProps, { findCourse, submitQuestion, fetchQuestions })(Course))
