@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_COURSES, FIND_COURSE } from './types';
+import { FETCH_USER, FETCH_COURSES, FIND_COURSE, SUBMIT_QUESTION } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -28,3 +28,14 @@ export const findCourse = id => async dispatch => {
 
   dispatch({ type: FIND_COURSE, payload: res.data });
 };
+
+export const submitQuestion = (values, courseID) => async dispatch => {
+  const res = await axios.post('/api/course/:id/questions', {
+    params: {
+      values,
+      courseID
+    }
+  });
+
+  dispatch({ type: SUBMIT_QUESTION, payload: res.data });
+}

@@ -5,14 +5,19 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findCourse } from '../../actions';
-import TextField from 'material-ui/TextField';
+import { reduxForm, Field } from 'redux-form';
+import { findCourse, submitQuestion } from '../../actions';
+import QuestionField from '../questions/QuestionField';
+import Done from 'material-ui/svg-icons/action/done';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Course extends Component {
   constructor(props) {
     super(props);
+
     this.state = { showPassword: true };
+    // this.submitQuestion = this.submitQuestion.bind(this);
   }
 
   componentDidMount() {
@@ -41,18 +46,23 @@ class Course extends Component {
     );
   }
 
+  renderQuestions() {
+    return this.props.course.questions.map(question => {
+      return (
+        <div key={question._id}>
+          <h5>{question.body}</h5>
+        </div>
+      );
+    });
+  }
+
   renderCourse() {
     if (this.props.course) {
       return (
         <div>
           <h3>Course Title: {this.props.course.title}</h3>
           {this.renderPassword()}
-          <TextField
-            hintText="What is the difference between BFS and DFS?"
-            floatingLabelText="Type Question Here"
-            multiLine={true}
-            rows={2}
-          />
+          {this.renderQuestions()}
         </div>
       );
     }
@@ -64,17 +74,47 @@ class Course extends Component {
     )
   }
 
+  renderFields() {
+    return(
+      <div>
+        <Field
+          label="Question Body"
+          type="text"
+          name="questionBody"
+          component={QuestionField}
+        />
+      </div>
+    );
+  }
+
   render() {
     return(
       <div>
         {this.renderCourse()}
+        <form onSubmit={this.props.handleSubmit(() => this.props.submitQuestion(this.props.formValues, this.props.course._id))}>
+          {this.renderFields()}
+          <RaisedButton
+            label="Submit Question"
+            labelPosition="before"
+            primary={true}
+            icon={<Done />}
+            type='submit'
+          />
+        </form>
       </div>
     )
   }
 }
 
 function mapStateToProps(state) {
-  return { course: state.course };
+  return {
+    course: state.course,
+    question: state.question,
+    formValues: state.form.questionForm ? state.form.questionForm.values : false
+  };
 }
 
-export default connect(mapStateToProps, { findCourse })(Course);
+export default reduxForm({
+  form: 'questionForm',
+  destroyOnUnmount: false
+})(connect(mapStateToProps, { findCourse, submitQuestion })(Course))

@@ -32,4 +32,22 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.post('/api/course/:id/questions', requireLogin, async(req, res) => {
+    const { values, courseID } = req.body.params;
+    const course = await Course.findById(courseID);
+
+    const question = {
+      body: values.questionBody
+    };
+
+    course.questions.push(question);
+
+    try {
+      await course.save();
+      res.send(course);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
 };
