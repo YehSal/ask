@@ -11,7 +11,7 @@ module.exports = app => {
   });
 
   app.get('/api/course/:id', requireLogin, async (req, res) => {
-    const course = await Course.find({ _id: req.body._id });
+    const course = await Course.findById(req.params.id);
 
     res.send(course);
   });

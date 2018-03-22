@@ -22,7 +22,9 @@ export const fetchCourses = () => async dispatch => {
 };
 
 export const findCourse = id => async dispatch => {
-  const res = await axios.get(`/api/course/${id}`);
-  console.log('here');
+  const res = await axios.get(`/api/course/${id}`, {
+    params: { id: id }
+  });
+
   dispatch({ type: FIND_COURSE, payload: res.data });
 };
