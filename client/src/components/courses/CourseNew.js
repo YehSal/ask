@@ -41,7 +41,7 @@ class CourseNew extends Component {
  * option to not destroy the values when the component is unmounted. Since
  * CourseNew component is always mounted in the process of showing the form or
  * the review, we will dump all the values the moment we navigate to any other
- * route, which is the behavior we want
+ * route, which is the behavior we seek
  */
 export default reduxForm({
   form: 'courseForm'

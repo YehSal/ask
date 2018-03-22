@@ -1,4 +1,6 @@
-// CourseForm shows a form for a user to add input
+/*
+ * CourseForm shows a form for the user to add input
+ */
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import CourseField from './CourseField';
@@ -6,45 +8,10 @@ import RaisedButton from 'material-ui/RaisedButton';
 import Done from 'material-ui/svg-icons/action/done';
 import Close from 'material-ui/svg-icons/navigation/close';
 import { Link } from 'react-router-dom';
-
-/*
- * TODO: Add a field to pick the hours and minutes for the course duration
- */
-const nextBtnStyles = {
-  button: {
-    margin: 12,
-    float: 'right'
-  },
-  exampleImageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
-  },
-};
-
-const cancelBtnStyles = {
-  button: {
-    margin: 12,
-    float: 'left'
-  },
-  exampleImageInput: {
-    cursor: 'pointer',
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    right: 0,
-    left: 0,
-    width: '100%',
-    opacity: 0,
-  },
-};
+import { nextBtnStyles, cancelBtnStyles } from '../../styles/courses/course_form';
 
 
+// TODO: Add a field to pick the hours and minutes for the course duration
 class CourseForm extends Component {
   renderFields() {
     return(
