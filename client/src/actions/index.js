@@ -1,5 +1,13 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_COURSES, FIND_COURSE, SUBMIT_QUESTION, FETCH_QUESTIONS } from './types';
+import {
+  FETCH_USER,
+  FETCH_COURSES,
+  FIND_COURSE,
+  SUBMIT_QUESTION,
+  FETCH_QUESTIONS,
+  CAST_UPVOTE,
+  CAST_DOWNVOTE
+} from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -47,4 +55,16 @@ export const fetchQuestions = courseID => async dispatch => {
   });
 
   dispatch({ type: FETCH_QUESTIONS, payload: res.data.questions });
-}
+};
+
+export const castUpVote = (courseID, questionID) => async dispatch => {
+  const res = await axios.post(`/api/course/${courseID}/question/${questionID}/upVote`);
+
+  dispatch({ type: CAST_UPVOTE, payload: res.data });
+};
+
+export const castDownVote = (courseID, questionID) => async dispatch => {
+  const res = await axios.post(`/api/course/${courseID}/question/${questionID}/downVote`);
+
+  dispatch({ type: CAST_DOWNVOTE, payload: res.data });
+};

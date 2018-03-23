@@ -5,6 +5,7 @@ import coursesReducer from './coursesReducer';
 import findCourseReducer from './findCourseReducer';
 import fetchQuestionReducer from './fetchQuestionReducer';
 import fetchQuestionsReducer from './fetchQuestionsReducer';
+import castVoteReducer from './castVoteReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
   courses: coursesReducer,
   course: findCourseReducer,
   question: fetchQuestionReducer,
-  questions: fetchQuestionsReducer
+  questions: fetchQuestionsReducer,
+  votes: castVoteReducer
 });

@@ -50,4 +50,39 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
+
+  app.post('/api/course/:courseID/question/:questionID/upVote', requireLogin, async(req, res) => {
+    const { courseID, questionID } = req.params;
+    const course = await Course.findById(courseID);
+    const question = course.questions.find(question => question._id == questionID)
+    question.upVote += 1;
+    var totalVotes = 0;
+
+
+    try {
+      await course.save();
+      course.questions.forEach(question => {
+        totalVotes += question.upVote;
+        totalVotes += question.downVote;
+      })
+
+      res.send(question);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  app.post('/api/course/:courseID/question/:questionID/downVote', requireLogin, async(req, res) => {
+    const { courseID, questionID } = req.params;
+    const course = await Course.findById(courseID);
+    const question = course.questions.find(question => question._id == questionID)
+    question.downVote += 1;
+
+    try {
+      await course.save();
+      res.send(question);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
 };

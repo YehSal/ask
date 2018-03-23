@@ -6,7 +6,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { findCourse, submitQuestion, fetchQuestions } from '../../actions';
+import { findCourse, submitQuestion, fetchQuestions, castUpVote, castDownVote } from '../../actions';
 import QuestionField from '../questions/QuestionField';
 import Done from 'material-ui/svg-icons/action/done';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -17,11 +17,13 @@ class Course extends Component {
     super(props);
 
     this.state = { showPassword: true };
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
   componentDidMount() {
-    // const courseID = this.props.match.params.id;
-    const courseID = this.props.location.state? this.props.location.state.courseID : this.props.match.params.id
+    // Depends on whether the user was redirected after creating a new course
+    // or the user clicked a link in the dashboard or somewhere else in the app
+    const courseID = this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id
     this.props.findCourse(courseID);
     this.props.fetchQuestions(courseID);
   }
@@ -53,6 +55,20 @@ class Course extends Component {
         return (
           <div key={question._id}>
             <h5>{question.body}</h5>
+            <h6>{question.upVote}</h6>
+            <h6>{question.downVote}</h6>
+            <button onClick={() => {
+              this.props.castUpVote(
+                this.props.course._id,
+                question._id,
+              )
+            }}>Upvote</button>
+            <button onClick={() => {
+              this.props.castDownVote(
+                this.props.course._id,
+                question._id,
+              )
+            }}>Downvote</button>
           </div>
         );
       });
@@ -61,6 +77,7 @@ class Course extends Component {
 
   renderCourse() {
     if (this.props.course) {
+      this.props.fetchQuestions(this.props.course._id);
       return (
         <div>
           <h3>Course Title: {this.props.course.title}</h3>
@@ -90,14 +107,18 @@ class Course extends Component {
     );
   }
 
+  submitHandler() {
+    this.props.submitQuestion(
+      this.props.formValues,
+      this.props.course._id,
+      this.props.fetchQuestions
+    );
+  }
   render() {
     return(
       <div>
         {this.renderCourse()}
-        <form onSubmit={this.props.handleSubmit(() => {
-          this.props.submitQuestion(this.props.formValues, this.props.course._id, this.props.fetchQuestions);
-          // this.props.fetchQuestions(this.props.course._id);
-        })}>
+        <form onSubmit={this.props.handleSubmit(this.submitHandler)}>
           {this.renderFields()}
           <RaisedButton
             label="Submit Question"
@@ -117,11 +138,12 @@ function mapStateToProps(state) {
     course: state.course,
     question: state.question,
     formValues: state.form.questionForm ? state.form.questionForm.values : false,
-    questions: state.questions
+    questions: state.questions,
+    votes: state.votes
   };
 }
 
 export default reduxForm({
   form: 'questionForm',
   destroyOnUnmount: false
-})(connect(mapStateToProps, { findCourse, submitQuestion, fetchQuestions })(Course))
+})(connect(mapStateToProps, { findCourse, submitQuestion, fetchQuestions, castUpVote, castDownVote })(Course))
