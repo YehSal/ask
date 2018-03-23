@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { findCourse, submitQuestion, fetchQuestions, castUpVote, castDownVote } from '../../actions';
 import QuestionField from '../questions/QuestionField';
+import QuestionList from '../questions/QuestionList';
 import Done from 'material-ui/svg-icons/action/done';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -49,49 +50,25 @@ class Course extends Component {
     );
   }
 
-  renderQuestions() {
-    if (this.props.questions) {
-      return this.props.questions.map(question => {
-        return (
-          <div key={question._id}>
-            <h5>{question.body}</h5>
-            <h6>{question.upVote}</h6>
-            <h6>{question.downVote}</h6>
-            <button onClick={() => {
-              this.props.castUpVote(
-                this.props.course._id,
-                question._id,
-              )
-            }}>Upvote</button>
-            <button onClick={() => {
-              this.props.castDownVote(
-                this.props.course._id,
-                question._id,
-              )
-            }}>Downvote</button>
-          </div>
-        );
-      });
-    }
-  }
-
   renderCourse() {
-    if (this.props.course) {
-      this.props.fetchQuestions(this.props.course._id);
+    var course = this.props.question || this.props.course;
+
+    if (course) {
       return (
         <div>
-          <h3>Course Title: {this.props.course.title}</h3>
+          <h3>Course Title: {course.title}</h3>
           {this.renderPassword()}
-          {this.renderQuestions()}
+          <QuestionList
+            questions={course.questions}
+            course={course}
+          />
         </div>
       );
     }
 
     return (
-      <div>
-        <h1>Loader</h1>
-      </div>
-    )
+      <div><h1>Loader</h1></div>
+    );
   }
 
   renderFields() {
@@ -138,8 +115,7 @@ function mapStateToProps(state) {
     course: state.course,
     question: state.question,
     formValues: state.form.questionForm ? state.form.questionForm.values : false,
-    questions: state.questions,
-    votes: state.votes
+    questions: state.questions
   };
 }
 

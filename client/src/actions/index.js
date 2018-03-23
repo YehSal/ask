@@ -44,8 +44,7 @@ export const submitQuestion = (values, courseID, fetchQuestions) => async dispat
       values
     }
   });
-
-  fetchQuestions(courseID);
+  
   dispatch({ type: SUBMIT_QUESTION, payload: res.data });
 };
 

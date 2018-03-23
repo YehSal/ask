@@ -56,17 +56,11 @@ module.exports = app => {
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
     question.upVote += 1;
-    var totalVotes = 0;
 
 
     try {
       await course.save();
-      course.questions.forEach(question => {
-        totalVotes += question.upVote;
-        totalVotes += question.downVote;
-      })
-
-      res.send(question);
+      res.send(course);
     } catch (err) {
       res.status(422).send(err);
     }
