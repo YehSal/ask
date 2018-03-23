@@ -5,7 +5,7 @@ export default function(state=null, action) {
     case CAST_UPVOTE:
       return action.payload || null;
     case CAST_DOWNVOTE:
-      return action.payload;
+      return action.payload || null;
     default:
       return state;
   }

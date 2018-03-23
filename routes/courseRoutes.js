@@ -74,7 +74,36 @@ module.exports = app => {
 
     try {
       await course.save();
-      res.send(question);
+      res.send(course);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  app.post('/api/course/:courseID/question/:questionID/reverseUpVote', requireLogin, async(req, res) => {
+    const { courseID, questionID } = req.params;
+    const course = await Course.findById(courseID);
+    const question = course.questions.find(question => question._id == questionID)
+    question.upVote -= 1;
+
+
+    try {
+      await course.save();
+      res.send(course);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  app.post('/api/course/:courseID/question/:questionID/reverseDownVote', requireLogin, async(req, res) => {
+    const { courseID, questionID } = req.params;
+    const course = await Course.findById(courseID);
+    const question = course.questions.find(question => question._id == questionID)
+    question.downVote -= 1;
+
+    try {
+      await course.save();
+      res.send(course);
     } catch (err) {
       res.status(422).send(err);
     }
