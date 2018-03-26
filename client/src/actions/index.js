@@ -6,7 +6,7 @@ import {
   SUBMIT_QUESTION,
   FETCH_QUESTIONS,
   CAST_UPVOTE,
-  CAST_DOWNVOTE
+  CAST_DOWNVOTE,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -44,7 +44,7 @@ export const submitQuestion = (values, courseID, fetchQuestions) => async dispat
       values
     }
   });
-  
+
   dispatch({ type: SUBMIT_QUESTION, payload: res.data });
 };
 

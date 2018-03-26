@@ -14,5 +14,5 @@ export default combineReducers({
   course: findCourseReducer,
   question: submitQuestionReducer,
   questions: fetchQuestionsReducer,
-  courseAfterVote: castVoteReducer
+  courseAfterVote: castVoteReducer,
 });

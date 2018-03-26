@@ -5,22 +5,9 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
-import { castUpVote, castDownVote } from '../../actions';
 import Question from './Question';
-import RaisedButton from 'material-ui/RaisedButton';
-
 
 class QuestionList extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      userCastedUpVote: false,
-      userCastedDownVote: false
-    }
-  }
-
   renderQuestions() {
     // Original course or after being updated by votes
     var course = this.props.courseAfterVote || this.props.course;
@@ -44,7 +31,9 @@ class QuestionList extends Component {
 }
 
 function mapStateToProps(state) {
-  return { courseAfterVote: state.courseAfterVote };
+  return {
+    courseAfterVote: state.courseAfterVote,
+  };
 }
 
-export default connect(mapStateToProps, { castUpVote, castDownVote })(QuestionList);
+export default connect(mapStateToProps)(QuestionList);

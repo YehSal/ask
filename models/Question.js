@@ -11,6 +11,9 @@ const questionSchema = new Schema({
     type: Number,
     default: 0
   },
+  usersUpVoted: { type: [Schema.Types.ObjectId] },
+  usersDownVoted: { type: [Schema.Types.ObjectId] },
+  _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 
 module.exports = questionSchema;
