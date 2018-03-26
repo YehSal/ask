@@ -2,8 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { castUpVote, castDownVote } from '../../actions';
 import RaisedButton from 'material-ui/RaisedButton';
+import * as _ from 'lodash';
 
 class Question extends Component {
+  checkUserUpVoted() {
+    return(_.includes(this.props.question.usersUpVoted, this.props.user._id));
+  }
+
+  checkUserDownVoted() {
+    return(_.includes(this.props.question.usersDownVoted, this.props.user._id));
+  }
+
   render() {
     return (
       <div>
@@ -13,14 +22,14 @@ class Question extends Component {
         <RaisedButton
           primary={true}
           onClick={() => {this.props.castUpVote(this.props.course._id, this.props.question._id)}}
-          disabled = {this.props.userUpVoted}
+          disabled = {this.checkUserUpVoted()}
         >
           Upvote
         </RaisedButton>
         <RaisedButton
           secondary={true}
           onClick={() => {this.props.castDownVote(this.props.course._id, this.props.question._id)}}
-          disabled = {this.props.userDownVoted}
+          disabled = {this.checkUserDownVoted()}
         >
           Downvote
         </RaisedButton>

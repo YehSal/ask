@@ -116,33 +116,4 @@ module.exports = app => {
       res.status(422).send(err);
     }
   });
-
-  app.get('/api/course/:courseID/question/:questionID/upVote', requireLogin, async(req, res) => {
-    const { courseID, questionID } = req.params;
-    const course = await Course.findById(courseID);
-    const question = course.questions.find(question => question._id == questionID);
-
-    if (_.some(question.usersUpVoted, req.user._id)) {
-      res.send({
-        userUpvoted: true,
-        userDownvoted: false
-      });
-    } else if (_.some(question.usersDownVoted, req.user._id)) {
-      res.send({
-        userUpvoted: false,
-        userDownvoted: true
-      });
-    } else if (_.some(question.usersUpVoted, req.user._id) && _.some(question.usersDownVoted, req.user._id)) {
-      //TODO: should send an error
-      res.send({
-        userUpvoted: true,
-        userDownvoted: true
-      });
-    } else {
-      res.send({
-        userUpvoted: false,
-        userDownvoted: false
-      });
-    }
-  });
 };
