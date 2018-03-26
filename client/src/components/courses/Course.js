@@ -11,7 +11,8 @@ import QuestionField from '../questions/QuestionField';
 import QuestionList from '../questions/QuestionList';
 import Done from 'material-ui/svg-icons/action/done';
 import RaisedButton from 'material-ui/RaisedButton';
-
+import RefreshIndicator from 'material-ui/RefreshIndicator';
+import { style } from '../../styles/courses/course';
 
 class Course extends Component {
   constructor(props) {
@@ -67,7 +68,16 @@ class Course extends Component {
     }
 
     return (
-      <div><h1>Loader</h1></div>
+      <div style={style.container}>
+        <RefreshIndicator
+          size={40}
+          left={10}
+          top={0}
+          status="loading"
+          style={style.refresh}
+        />
+      </div>
+
     );
   }
 
