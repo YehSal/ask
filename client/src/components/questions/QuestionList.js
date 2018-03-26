@@ -28,6 +28,7 @@ class QuestionList extends Component {
   render() {
     return (
       <div>
+        <h3>Questions</h3>
         {this.renderQuestions()}
       </div>
     );

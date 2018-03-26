@@ -2,7 +2,22 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { castUpVote, castDownVote } from '../../actions';
 import RaisedButton from 'material-ui/RaisedButton';
+import { Container, Row, Col } from 'react-grid-system';
 import * as _ from 'lodash';
+
+const style = {
+  div: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
+  upVote: {
+    float: 'right',
+  },
+  downVote: {
+    float: 'right',
+    display: 'block'
+  }
+};
 
 class Question extends Component {
   checkUserUpVoted() {
@@ -15,25 +30,31 @@ class Question extends Component {
 
   render() {
     return (
-      <div>
-        <h5>{this.props.question.body}</h5>
-        <h6>{this.props.question.upVote}</h6>
-        <h6>{this.props.question.downVote}</h6>
-        <RaisedButton
-          primary={true}
-          onClick={() => {this.props.castUpVote(this.props.course._id, this.props.question._id)}}
-          disabled = {this.checkUserUpVoted()}
-        >
-          Upvote
-        </RaisedButton>
-        <RaisedButton
-          secondary={true}
-          onClick={() => {this.props.castDownVote(this.props.course._id, this.props.question._id)}}
-          disabled = {this.checkUserDownVoted()}
-        >
-          Downvote
-        </RaisedButton>
-      </div>
+      <Container fluid style={{ lineHeight: '32px' }}>
+        <Row align="start" style={{ height: '75px' }}>
+          <h5>{this.props.question.body}</h5>
+        </Row>
+        <Row align="start" style={{ height: '75px' }}>
+          <RaisedButton
+            primary={true}
+            onClick={() => {this.props.castUpVote(this.props.course._id, this.props.question._id)}}
+            disabled={this.checkUserUpVoted()}
+          >
+            Upvote
+          </RaisedButton>
+          <h6>{this.props.question.upVote}</h6>
+
+          <RaisedButton
+            secondary={true}
+            onClick={() => {this.props.castDownVote(this.props.course._id, this.props.question._id)}}
+            disabled={this.checkUserDownVoted()}
+          >
+            Downvote
+          </RaisedButton>
+          <h6>{this.props.question.downVote}</h6>
+        </Row>
+        <hr/>
+      </Container>
     );
   }
 }
