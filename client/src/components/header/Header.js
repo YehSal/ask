@@ -2,10 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
-
 import AppBar from 'material-ui/AppBar';
 import LoginButton from './LoginButton';
-import LogoutButton from './LogoutButton';
+import Logged from './Logged';
 
 class Header extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class Header extends Component {
       case false:
         return <LoginButton />
       default:
-        return <LogoutButton />
+        return <Logged />
     }
   }
 

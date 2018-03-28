@@ -2,22 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { castUpVote, castDownVote } from '../../actions';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Container, Row, Col } from 'react-grid-system';
+import { Container, Row } from 'react-grid-system';
 import * as _ from 'lodash';
-
-const style = {
-  div: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  upVote: {
-    float: 'right',
-  },
-  downVote: {
-    float: 'right',
-    display: 'block'
-  }
-};
 
 class Question extends Component {
   checkUserUpVoted() {

@@ -101,6 +101,7 @@ class Course extends Component {
       this.props.fetchQuestions
     );
   }
+
   render() {
     return(
       <div>

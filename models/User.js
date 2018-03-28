@@ -3,7 +3,11 @@ const { Schema } = mongoose;
 
 
 const userSchema = new Schema({
-  googleId: String
+  googleId: String,
+  role: {
+    type: Number,
+    default: 0
+  }
 });
 
 

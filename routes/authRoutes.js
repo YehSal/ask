@@ -35,4 +35,24 @@ module.exports = app => {
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });
+  
+  app.post('/api/current_user/role/:role', async (req, res) => {
+    const { role } = req.params;
+    var user = req.user;
+
+    // 1: User is a professor
+    // 2: User is a student
+    if (role === '1') {
+      user.role = 1;
+    } else if (role === '2') {
+      user.role = 2;
+    }
+
+    try {
+      await user.save();
+      res.send(user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  })
 };
