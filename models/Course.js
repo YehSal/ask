@@ -13,7 +13,7 @@ const courseSchema = new Schema({
   title: String,
   expirationDate: {
     type: Date,
-    default: moment(new Date()).add(2, 'm').toDate()
+    default: moment().toDate()
   },
   password: {
     type: String,

@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 const _ = require('lodash');
+var moment = require('moment-timezone');
+
 
 const Course = mongoose.model('courses');
 
@@ -18,10 +20,19 @@ module.exports = app => {
   });
 
   app.post('/api/courses', requireLogin, async(req, res) => {
-    const { courseTitle } = req.body;
+    const { courseTitle, courseDuration } = req.body;
+    var [hour, min] = courseDuration.split(':');
+    const expirationDate = moment();
+
+    expirationDate
+      .add(hour, 'hours')
+      .add(min, 'minutes')
+      .toDate();
+
     const course = new Course({
       title: courseTitle,
-      _user: req.user.id
+      _user: req.user.id,
+      expirationDate
     });
 
     try {

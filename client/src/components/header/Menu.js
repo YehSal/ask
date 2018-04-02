@@ -5,7 +5,6 @@ import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 const Menu = ({ dashboardHandler, history }) => {
-
   return (
     <IconMenu
       iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}

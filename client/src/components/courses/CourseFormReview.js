@@ -18,6 +18,8 @@ const CourseFormReview = ({ onCancel, formValues, createCourse, history }) => {
         <div>
           <label>Course Title:</label>
           <div>{formValues.courseTitle}</div>
+          <label>Course Duration</label>
+          <div>{formValues.courseDuration}</div>
         </div>
       </div>
       <RaisedButton
