@@ -6,6 +6,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchUser } from '../../actions';
 import Question from './Question';
+import * as _ from 'lodash';
 
 class QuestionList extends Component {
   componentDidMount() {
@@ -15,8 +16,12 @@ class QuestionList extends Component {
   renderQuestions() {
     // Original course or after being updated by votes
     var course = this.props.courseAfterVote || this.props.course;
+    var questions = course.questions;
 
-    return course.questions.map(question => {
+    // TODO: Priority algorithm
+    questions = _.orderBy(questions, ['upVote', 'downVote'], ['desc', 'asc']);
+
+    return questions.map(question => {
       return (
         <div key={question._id}>
           <Question question={question} course={course} user={this.props.user} />

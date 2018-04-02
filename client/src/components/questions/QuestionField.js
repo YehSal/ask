@@ -13,6 +13,7 @@ export default ({ input, label, meta: { error, touched } }) => {
         floatingLabelText="Type Question Here"
         multiLine={true}
         rows={1}
+        errorText={touched && error}
         {...input}
       />
     </div>
