@@ -1,39 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { fetchCourses } from '../../actions';
 
-class CourseList extends Component {
-  componentDidMount() {
-    this.props.fetchCourses();
-  }
-
-  renderCourses() {
-    return this.props.courses.map(course => {
-      return (
-        <div key={course._id}>
-          <Link to={{
-            pathname: `/course/{course._id}`,
-            state: { courseID: course._id }
-          }}>
-            <h5>{course.title}</h5>
-          </Link>
-        </div>
-      );
-    });
-  }
-
-  render() {
+const CourseList = ({ courses }) => {
+  return courses.map(course => {
     return (
-      <div>
-        {this.renderCourses()}
+      <div key={course._id}>
+        <Link to={{
+          pathname: `/course/{course._id}`,
+          state: { courseID: course._id }
+        }}>
+          <h5>{course.title}</h5>
+        </Link>
       </div>
     );
-  }
+  });
 }
 
-function mapStateToProps(state) {
-  return { courses: state.courses };
-}
-
-export default connect(mapStateToProps, { fetchCourses })(CourseList);
+export default CourseList;
