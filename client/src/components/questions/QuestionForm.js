@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import QuestionField from '../questions/QuestionField';
-import Done from 'material-ui/svg-icons/action/done';
-import RaisedButton from 'material-ui/RaisedButton';
 import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import { findCourse, submitQuestion, fetchQuestions, castUpVote, castDownVote } from '../../actions';
+import QuestionField from '../questions/QuestionField';
+import { submitQuestion } from '../../actions';
+import RaisedButton from 'material-ui/RaisedButton';
+import Done from 'material-ui/svg-icons/action/done';
 
 
 class QuestionForm extends Component {
@@ -75,4 +75,4 @@ export default reduxForm({
   validate,
   form: 'questionForm',
   destroyOnUnmount: false
-})(connect(mapStateToProps, { findCourse, submitQuestion, fetchQuestions, castUpVote, castDownVote })(QuestionForm))
+})(connect(mapStateToProps, { submitQuestion })(QuestionForm))

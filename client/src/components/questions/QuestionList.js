@@ -9,10 +9,6 @@ import Question from './Question';
 import * as _ from 'lodash';
 
 class QuestionList extends Component {
-  componentDidMount() {
-    this.props.fetchUser();
-  }
-
   renderQuestions() {
     // Original course or after being updated by votes
     var course = this.props.courseAfterVote || this.props.course;
@@ -43,8 +39,7 @@ class QuestionList extends Component {
 function mapStateToProps(state) {
   return {
     courseAfterVote: state.courseAfterVote,
-    user: state.auth
   };
 }
 
-export default connect(mapStateToProps, { fetchUser })(QuestionList);
+export default connect(mapStateToProps)(QuestionList);
