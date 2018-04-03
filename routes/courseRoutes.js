@@ -13,7 +13,6 @@ module.exports = app => {
   });
 
   app.get('/api/course/:id', requireLogin, async (req, res) => {
-    console.log(req.user);
     const course = await Course.findById(req.params.id);
 
     //TODO: fetchQuestions and clicking a course trigger the same route

@@ -7,7 +7,7 @@ import Header from './header/Header';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
 import CourseNew from './courses/CourseNew';
-import Course from './courses/Course';
+import CourseContainer from './courses/CourseContainer';
 import RoleForm from './roles/RoleForm';
 
 class App extends Component {
@@ -35,7 +35,7 @@ class App extends Component {
                   <Route exact path="/" component={Landing} />
                   <Route exact path="/courses" component={Dashboard} />
                   <Route exact path="/courses/new" component={CourseNew} />
-                  <Route exact path="/course/:id" component={Course} />
+                  <Route exact path="/course/:id" component={CourseContainer} />
                 </div>
               </BrowserRouter>
             </div>
@@ -60,7 +60,7 @@ class App extends Component {
               <Route exact path="/" component={Landing} />
               <Route exact path="/courses" component={Dashboard} />
               <Route exact path="/courses/new" component={CourseNew} />
-              <Route exact path="/course/:id" component={Course} />
+              <Route exact path="/course/:id" component={CourseContainer} />
             </div>
           </BrowserRouter>
         </div>
