@@ -3,7 +3,6 @@ const requireLogin = require('../middlewares/requireLogin');
 const _ = require('lodash');
 var moment = require('moment-timezone');
 
-
 const Course = mongoose.model('courses');
 
 module.exports = app => {
@@ -14,9 +13,21 @@ module.exports = app => {
   });
 
   app.get('/api/course/:id', requireLogin, async (req, res) => {
+    console.log(req.user);
     const course = await Course.findById(req.params.id);
 
-    res.send(course);
+    //TODO: fetchQuestions and clicking a course trigger the same route
+    if (!_.some(course.participants, req.user._id)) {
+      course.participants.push(req.user._id);
+      course.participants = _.uniqBy(course.participants); // Ensures no duplicates because of firing route twice
+    }
+
+    try {
+      await course.save();
+      res.send(course);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 
   app.post('/api/courses', requireLogin, async(req, res) => {

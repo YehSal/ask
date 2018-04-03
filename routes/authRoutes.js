@@ -35,7 +35,7 @@ module.exports = app => {
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });
-  
+
   app.post('/api/current_user/role/:role', async (req, res) => {
     const { role } = req.params;
     var user = req.user;

@@ -29,7 +29,14 @@ passport.use(
       return done(null, existingUser);
     }
 
-    const user = await new User({ googleId: profile.id }).save()
+    //TODO: Feature to edit profile for name, email, profile pic, etc.
+    const user = await new User({
+      googleId: profile.id,
+      email: profile.emails[0].value,
+      firstName: profile.name.givenName,
+      lastName: profile.name.familyName
+    }).save()
+
     done(null, user);
   })
 );

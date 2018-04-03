@@ -7,9 +7,11 @@ const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io')
 const keys = require('./config/keys');
+
 require('./models/User');
 require('./models/Course');
 require('./services/passport');
+require('./jobs/sendQuestions');
 
 mongoose.connect(keys.mongoURI);
 
@@ -37,6 +39,8 @@ app.use(passport.session());
  */
 require('./routes/authRoutes')(app);
 require('./routes/courseRoutes')(app);
+
+
 
 server.listen(PORT, () => {
   console.log(`Server is up on port ${PORT}`);
