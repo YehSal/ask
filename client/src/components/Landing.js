@@ -4,7 +4,7 @@ const Landing = () => {
   return(
     <div style={{ textAlign: 'center' }}>
       <h1>
-        QueueMe
+        Qme
       </h1>
       Ask all the questions you want!
     </div>

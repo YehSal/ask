@@ -36,7 +36,7 @@ class Header extends Component {
 
     return(
       <AppBar
-        title={<span style={styles.title}>QueueMe</span>}
+        title={<span style={styles.title}>Qme</span>}
         onTitleClick={this.handleTitleClick}
         iconElementRight={this.renderButton()}
         showMenuIconButton={false}

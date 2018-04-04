@@ -1,6 +1,5 @@
 /*
- * Course is the component responsible for showing the current course session.
- * It has the text box for students to ask and rate questions.
+ * CourseContainer passes data to Course and QuestionList
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
