@@ -6,6 +6,24 @@ export const hOneStyle = {
   textAlign: 'center',
 };
 
-export const addButton = {
-  
+export const ListStyle = {
+  containerStyle: {
+    paddingRight:80,
+    background: '#ededed',
+    textAlign: 'center'
+  },
+  itemStyle: {
+    marginBottom: 25,
+    paddingBottom:45,
+    textAlign:'left'
+  }
+}
+
+export const ButtonStyle = {
+  upVoteStyle: {
+    marginRight: 3
+  },
+  downVoteStyle: {
+    marginRight: 3
+  }
 }

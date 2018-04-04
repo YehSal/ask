@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { castUpVote, castDownVote } from '../../actions';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Container, Row } from 'react-grid-system';
 import * as _ from 'lodash';
+import RaisedButton from 'material-ui/RaisedButton';
+import { List, ListItem } from 'material-ui/List';
+import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
+import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
+import Divider from 'material-ui/Divider';
+import { ButtonStyle, ListStyle } from '../../styles/base';
 
 class Question extends Component {
   checkUserUpVoted() {
@@ -14,33 +18,47 @@ class Question extends Component {
     return(_.includes(this.props.question.usersDownVoted, this.props.user._id));
   }
 
+  renderRightIcon() {
+    return(
+      <div >
+        <RaisedButton
+          primary={true}
+          labelPosition="before"
+          label={this.props.question.upVote.toString()}
+          labelStyle={ButtonStyle.upVoteStyle}
+          icon={<ThumbUp />}
+          onClick={() => {this.props.castUpVote(this.props.course._id, this.props.question._id)}}
+          disabled={this.checkUserUpVoted()}
+        >
+        </RaisedButton>
+        <RaisedButton
+          secondary={true}
+          labelPosition="before"
+          label={this.props.question.downVote.toString()}
+          labelStyle={ButtonStyle.downVoteStyle}
+          icon={<ThumbDown />}
+          onClick={() => {this.props.castDownVote(this.props.course._id, this.props.question._id)}}
+          disabled={this.checkUserDownVoted()}
+        >
+        </RaisedButton>
+      </div>
+    );
+  }
+
   render() {
     return (
-      <Container fluid style={{ lineHeight: '32px' }}>
-        <Row align="start" style={{ height: '75px' }}>
-          <h5>{this.props.question.body}</h5>
-        </Row>
-        <Row align="start" style={{ height: '75px' }}>
-          <RaisedButton
-            primary={true}
-            onClick={() => {this.props.castUpVote(this.props.course._id, this.props.question._id)}}
-            disabled={this.checkUserUpVoted()}
-          >
-            Upvote
-          </RaisedButton>
-          <h6>{this.props.question.upVote}</h6>
-
-          <RaisedButton
-            secondary={true}
-            onClick={() => {this.props.castDownVote(this.props.course._id, this.props.question._id)}}
-            disabled={this.checkUserDownVoted()}
-          >
-            Downvote
-          </RaisedButton>
-          <h6>{this.props.question.downVote}</h6>
-        </Row>
-        <hr/>
-      </Container>
+      <div style={ListStyle.containerStyle}>
+        <List>
+          <ListItem
+            style={ListStyle.itemStyle}
+            disabled={true}
+            primaryText={this.props.question.body}
+            disableKeyboardFocus={false}
+            rightIcon={this.renderRightIcon()}
+          />
+          <Divider />
+        </List>
+      </div>
     );
   }
 }
