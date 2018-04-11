@@ -7,8 +7,7 @@ import {
   FETCH_QUESTIONS,
   CAST_UPVOTE,
   CAST_DOWNVOTE,
-  CHOOSE_ROLE,
-  FETCH_INSTRUCTOR
+  CHOOSE_ROLE
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -74,12 +73,4 @@ export const chooseRole = values => async dispatch => {
   const res = await axios.post(`/api/current_user/role/${values.userRole}`);
 
   dispatch({ type: CHOOSE_ROLE, payload: res.data });
-}
-
-export const fetchInstructor = courseID => async dispatch => {
-  const courseRes = await axios.get(`/api/course/${courseID}`);
-  const course = courseRes.data;
-  const res = await axios.get(`/api/user/${course._user}`);
-
-  dispatch({ type: FETCH_INSTRUCTOR, payload: res.data });
 }

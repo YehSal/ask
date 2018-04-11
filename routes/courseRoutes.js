@@ -39,8 +39,10 @@ module.exports = app => {
       .add(min, 'minutes')
       .toDate();
 
+    const instructorName = req.user.firstName + ' ' + req.user.lastName;
     const course = new Course({
       title: courseTitle,
+      instructorName: instructorName,
       _user: req.user.id,
       expirationDate
     });

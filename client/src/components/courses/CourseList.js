@@ -23,7 +23,7 @@ const renderContents = (courses) => {
             <h5 className="pageTitle">{course.title}</h5>
           </Link>
         </TableRowColumn>
-        <TableRowColumn>James Glenn</TableRowColumn>
+        <TableRowColumn>{course.instructorName}</TableRowColumn>
         <TableRowColumn>1</TableRowColumn>
         <TableRowColumn>20</TableRowColumn>
       </TableRow>

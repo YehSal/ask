@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findCourse, fetchQuestions, fetchUser, fetchInstructor } from '../../actions';
+import { findCourse, fetchQuestions, fetchUser } from '../../actions';
 import Loader from '../Loader';
 import Course from './Course';
 import QuestionForm from '../questions/QuestionForm';
@@ -16,7 +16,6 @@ class CourseContainer extends Component {
     const courseID = this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id
     this.props.findCourse(courseID);
     this.props.fetchQuestions(courseID);
-    this.props.fetchInstructor(courseID);
     this.props.fetchUser();
   }
 
@@ -59,7 +58,6 @@ function mapStateToProps(state) {
     course: state.course,
     question: state.question,
     questions: state.questions,
-    instructor: state.instructor
   };
 }
 
@@ -67,5 +65,4 @@ export default connect(mapStateToProps, {
   findCourse,
   fetchQuestions,
   fetchUser,
-  fetchInstructor
 })(CourseContainer);

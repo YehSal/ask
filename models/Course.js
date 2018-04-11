@@ -11,6 +11,7 @@ const moment = require('moment');
  */
 const courseSchema = new Schema({
   title: String,
+  instructorName: String,
   expirationDate: {
     type: Date,
     default: moment().toDate()
