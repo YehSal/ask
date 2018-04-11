@@ -1,4 +1,3 @@
-// Display the course info
 import React, { Component } from 'react';
 
 class Course extends Component {
@@ -35,6 +34,7 @@ class Course extends Component {
     return (
       <div>
         <h3>Course Title: {this.props.course.title}</h3>
+        <h3>Instructor: {this.props.instructor.firstName} {this.props.instructor.lastName}</h3>
         {this.renderPassword()}
       </div>
     );

@@ -1,4 +1,7 @@
 const passport = require('passport');
+const mongoose = require('mongoose');
+
+const User = mongoose.model('users');
 
 module.exports = app => {
   /**
@@ -34,6 +37,18 @@ module.exports = app => {
    */
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
+  });
+
+  /*
+   * Fetch user by ID
+   */
+  app.get('/api/user/:id', async (req, res) => {
+    try {
+      user = await User.findById(req.params.id);
+      res.send(req.user);
+    } catch (err) {
+      res.status(422).send(err);
+    }
   });
 
   app.post('/api/current_user/role/:role', async (req, res) => {

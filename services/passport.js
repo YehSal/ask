@@ -2,6 +2,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const keys = require('../config/keys');
 const mongoose = require('mongoose');
+const _ = require('lodash');
 const User = mongoose.model('users');
 
 passport.serializeUser((user, done ) => {
@@ -33,8 +34,8 @@ passport.use(
     const user = await new User({
       googleId: profile.id,
       email: profile.emails[0].value,
-      firstName: profile.name.givenName,
-      lastName: profile.name.familyName
+      firstName: _.capitalize(profile.name.givenName),
+      lastName: _.capitalize(profile.name.familyName)
     }).save()
 
     done(null, user);

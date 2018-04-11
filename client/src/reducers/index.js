@@ -6,6 +6,7 @@ import findCourseReducer from './findCourseReducer';
 import submitQuestionReducer from './submitQuestionReducer';
 import fetchQuestionsReducer from './fetchQuestionsReducer';
 import castVoteReducer from './castVoteReducer';
+import instructorReducer from './instructorReducer';
 
 export default combineReducers({
   auth: authReducer,
@@ -15,4 +16,5 @@ export default combineReducers({
   question: submitQuestionReducer,
   questions: fetchQuestionsReducer,
   courseAfterVote: castVoteReducer,
+  instructor: instructorReducer
 });

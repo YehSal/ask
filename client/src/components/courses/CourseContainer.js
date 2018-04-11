@@ -3,7 +3,7 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findCourse, fetchQuestions, fetchUser } from '../../actions';
+import { findCourse, fetchQuestions, fetchUser, fetchInstructor } from '../../actions';
 import Loader from '../Loader';
 import Course from './Course';
 import QuestionForm from '../questions/QuestionForm';
@@ -16,6 +16,7 @@ class CourseContainer extends Component {
     const courseID = this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id
     this.props.findCourse(courseID);
     this.props.fetchQuestions(courseID);
+    this.props.fetchInstructor(courseID);
     this.props.fetchUser();
   }
 
@@ -25,8 +26,16 @@ class CourseContainer extends Component {
     if (course) {
       return (
         <div>
-          <Course course={course} renderPassword={this.renderPassword} />
-          <QuestionList questions={course.questions} course={course} user={this.props.user} />
+          <Course
+            course={course}
+            renderPassword={this.renderPassword}
+            instructor={this.props.instructor}
+          />
+          <QuestionList
+            questions={course.questions}
+            course={course}
+            user={this.props.user}
+          />
         </div>
       );
     }
@@ -49,8 +58,14 @@ function mapStateToProps(state) {
     user: state.auth,
     course: state.course,
     question: state.question,
-    questions: state.questions
+    questions: state.questions,
+    instructor: state.instructor
   };
 }
 
-export default connect(mapStateToProps, { findCourse, fetchQuestions, fetchUser })(CourseContainer);
+export default connect(mapStateToProps, {
+  findCourse,
+  fetchQuestions,
+  fetchUser,
+  fetchInstructor
+})(CourseContainer);
