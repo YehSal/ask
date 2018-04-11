@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
 import { compose } from 'recompose';
-import Menu from './Menu';
+import MenuProfessor from './MenuProfessor';
 
-class Logged extends Component {
+class LoggedProfessor extends Component {
   constructor(props) {
     super(props);
 
@@ -16,9 +16,9 @@ class Logged extends Component {
 
   render() {
     return (
-      <Menu {...this.props} dashboardHandler={this.dashboardHandler}/>
+      <MenuProfessor {...this.props} dashboardHandler={this.dashboardHandler}/>
     );
   }
 }
 
-export default compose(withRouter)(Logged);
+export default compose(withRouter)(LoggedProfessor);

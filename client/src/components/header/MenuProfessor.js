@@ -4,7 +4,7 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-const Menu = ({ dashboardHandler, history }) => {
+const MenuProfessor = ({ dashboardHandler, history }) => {
   return (
     <IconMenu
       iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
@@ -23,4 +23,4 @@ const Menu = ({ dashboardHandler, history }) => {
   );
 }
 
-export default Menu;
+export default MenuProfessor;

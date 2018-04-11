@@ -7,7 +7,8 @@ import {
   FETCH_QUESTIONS,
   CAST_UPVOTE,
   CAST_DOWNVOTE,
-  CHOOSE_ROLE
+  CHOOSE_ROLE,
+  JOIN_COURSE
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -73,4 +74,13 @@ export const chooseRole = values => async dispatch => {
   const res = await axios.post(`/api/current_user/role/${values.userRole}`);
 
   dispatch({ type: CHOOSE_ROLE, payload: res.data });
+}
+
+export const joinCourse = (values, history) => async dispatch => {
+  const res = await axios.get(`/api/course/joinCourse/${values.coursePassword}`);
+  const courseID = res.data._id;
+
+  history.push(`/course/${courseID}`);
+
+  dispatch({ type: JOIN_COURSE, payload: res.data });
 }

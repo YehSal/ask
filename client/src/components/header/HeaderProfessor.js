@@ -4,9 +4,9 @@ import { withRouter } from 'react-router';
 import { compose } from 'recompose';
 import AppBar from 'material-ui/AppBar';
 import LoginButton from './LoginButton';
-import Logged from './Logged';
+import LoggedProfessor from './LoggedProfessor';
 
-class Header extends Component {
+class HeaderProfessor extends Component {
   constructor(props) {
     super(props);
     this.handleTitleClick = this.handleTitleClick.bind(this);
@@ -19,7 +19,7 @@ class Header extends Component {
       case false:
         return <LoginButton />
       default:
-        return <Logged />
+        return <LoggedProfessor />
     }
   }
 
@@ -57,4 +57,4 @@ function mapStateToProps(state) {
 /*
  * Compose makes it easy to hook up several HoC's by just chaining them
  */
-export default compose(connect(mapStateToProps), withRouter)(Header);
+export default compose(connect(mapStateToProps), withRouter)(HeaderProfessor);

@@ -39,6 +39,7 @@ app.use(passport.session());
  */
 require('./routes/authRoutes')(app);
 require('./routes/courseRoutes')(app);
+require('./routes/questionRoutes')(app);
 
 
 
