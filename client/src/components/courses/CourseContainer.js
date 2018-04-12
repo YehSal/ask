@@ -20,19 +20,17 @@ class CourseContainer extends Component {
   }
 
   renderContents() {
-    var course = this.props.question || this.props.course;
-
-    if (course) {
+    if (this.props.course && this.props.questions) {
       return (
         <div>
           <Course
-            course={course}
+            course={this.props.course}
             renderPassword={this.renderPassword}
             instructor={this.props.instructor}
           />
           <QuestionList
-            questions={course.questions}
-            course={course}
+            questions={this.props.questions}
+            course={this.props.course}
             user={this.props.user}
           />
         </div>
@@ -56,7 +54,6 @@ function mapStateToProps(state) {
   return {
     user: state.auth,
     course: state.course,
-    question: state.question,
     questions: state.questions,
   };
 }

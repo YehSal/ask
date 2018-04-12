@@ -9,9 +9,8 @@ import * as _ from 'lodash';
 
 class QuestionList extends Component {
   renderQuestions() {
-    // Original course or after being updated by votes
-    var course = this.props.courseAfterVote || this.props.course;
-    var questions = course.questions;
+    var course = this.props.course || this.props.courseAfterVote;
+    var questions = this.props.questions || course.questions;
 
     // TODO: Priority algorithm
     questions = _.orderBy(questions, ['upVote', 'downVote'], ['desc', 'asc']);
@@ -37,7 +36,7 @@ class QuestionList extends Component {
 
 function mapStateToProps(state) {
   return {
-    courseAfterVote: state.courseAfterVote,
+    courseAfterVote: state.courseAfterVote
   };
 }
 

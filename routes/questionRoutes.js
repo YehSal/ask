@@ -36,7 +36,7 @@ module.exports = app => {
 
     try {
       await course.save();
-      res.send(course);
+      res.send(course.questions);
     } catch (err) {
       res.status(422).send(err);
     }
@@ -67,7 +67,7 @@ module.exports = app => {
 
     try {
       await course.save();
-      res.send(course);
+      res.send(course.questions);
     } catch (err) {
       res.status(422).send(err);
     }

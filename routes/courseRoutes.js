@@ -63,14 +63,14 @@ module.exports = app => {
     const course = await Course.findById(courseID);
     const question = {
       body: values.questionBody,
-      _user: req.user.id
+      _user: req.user.id,
     };
 
     course.questions.push(question);
 
     try {
       await course.save();
-      res.send(course);
+      res.send(_.last(course.questions));
     } catch (err) {
       res.status(422).send(err);
     }
