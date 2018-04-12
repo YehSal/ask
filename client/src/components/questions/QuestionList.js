@@ -3,7 +3,6 @@
  * the user to upvote or downvote
  */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Question from './Question';
 import * as _ from 'lodash';
 
@@ -34,10 +33,4 @@ class QuestionList extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    courseAfterVote: state.courseAfterVote
-  };
-}
-
-export default connect(mapStateToProps)(QuestionList);
+export default QuestionList;
