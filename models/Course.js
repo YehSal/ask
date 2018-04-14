@@ -19,7 +19,7 @@ const courseSchema = new Schema({
   password: {
     type: String,
     default: randomstring.generate({
-      length: 7,
+      length: 10,
       readable: true,
       charset: 'alphanumeric'
     })

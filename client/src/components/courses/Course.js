@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import RaisedButton from 'material-ui/RaisedButton';
+import Divider from 'material-ui/Divider';
 
 class Course extends Component {
   constructor(props) {
@@ -12,20 +14,30 @@ class Course extends Component {
   renderPassword() {
     if (this.state.showPassword) {
       return (
-        <div>
-          <h3>Password: {this.props.course.password}</h3>
-          <button onClick={() => this.setState({ showPassword: false })}>
-            Hide Password
-          </button>
+        <div >
+          <RaisedButton
+            secondary={true}
+            labelPosition="before"
+            label='Hide Password'
+            onClick={() => this.setState({ showPassword: false })}
+
+          />
+          <h3 style={{display:'inline', marginLeft:10}}>Password: {this.props.course.password}</h3>
+          <Divider style={{display: 'block', width: '100%', marginTop:10}} />
         </div>
       );
     }
 
     return (
       <div>
-        <button onClick={() => this.setState({ showPassword: true })}>
-          Show Password
-        </button>
+        <RaisedButton
+          primary={true}
+          labelPosition="before"
+          label='Show Password'
+          onClick={() => this.setState({ showPassword: true })}
+        />
+
+        <Divider style={{display: 'block', width: '100%', marginTop:10}}/>
       </div>
     );
   }

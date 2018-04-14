@@ -37,7 +37,7 @@ class QuestionForm extends Component {
 
   render() {
     return (
-      <form onSubmit={this.props.handleSubmit(this.submitHandler)}>
+      <form onSubmit={this.props.handleSubmit(this.submitHandler)} style={{textAlign: 'center'}}>
         {this.renderFields()}
         <RaisedButton
           label="Submit Question"

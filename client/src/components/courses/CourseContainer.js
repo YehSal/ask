@@ -1,13 +1,14 @@
 /*
- * CourseContainer passes data to Course and QuestionList
+ * CourseContainer passes data to Course and QuestionListContainer
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findCourse, fetchQuestions, fetchUser } from '../../actions';
+import { findCourse, fetchUser } from '../../actions';
 import Loader from '../Loader';
 import Course from './Course';
 import QuestionForm from '../questions/QuestionForm';
 import QuestionList from '../questions/QuestionList';
+import QuestionListContainer from '../questions/QuestionListContainer';
 
 class CourseContainer extends Component {
   // CourseID Depends on whether the user was redirected after creating a new
@@ -15,21 +16,23 @@ class CourseContainer extends Component {
   componentDidMount() {
     const courseID = this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id
     this.props.findCourse(courseID);
-    this.props.fetchQuestions(courseID);
     this.props.fetchUser();
   }
 
   renderContents() {
-    if (this.props.course && this.props.questions) {
+    if (this.props.course) {
+      console.log('Course Container: ', this.props.course);
       return (
         <div>
           <Course
             course={this.props.course}
             renderPassword={this.renderPassword}
-            instructor={this.props.instructor}
           />
+          {/* <QuestionListContainer
+            course={this.props.course}
+            user={this.props.user}
+          /> */}
           <QuestionList
-            questions={this.props.questions}
             course={this.props.course}
             user={this.props.user}
           />
@@ -54,12 +57,10 @@ function mapStateToProps(state) {
   return {
     user: state.auth,
     course: state.course,
-    questions: state.questions,
   };
 }
 
 export default connect(mapStateToProps, {
   findCourse,
-  fetchQuestions,
-  fetchUser,
+  fetchUser
 })(CourseContainer);

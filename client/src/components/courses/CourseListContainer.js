@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchCourses } from '../../actions';
 import CourseList from './CourseList';
+import Loader from '../Loader';
 
 class CourseListContainer extends Component {
   componentDidMount() {
@@ -9,7 +10,11 @@ class CourseListContainer extends Component {
   }
 
   render() {
-    return <CourseList courses={this.props.courses}/>;
+    if (this.props.courses) {
+      return <CourseList courses={this.props.courses}/>;
+    }
+
+    return <Loader />;
   }
 }
 

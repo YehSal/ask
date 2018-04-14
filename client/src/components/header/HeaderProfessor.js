@@ -24,7 +24,7 @@ class HeaderProfessor extends Component {
   }
 
   handleTitleClick() {
-    return this.props.history.push('/courses');
+    return this.props.history.push('/');
   }
 
   render() {

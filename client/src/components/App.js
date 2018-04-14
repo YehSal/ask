@@ -29,14 +29,19 @@ class App extends Component {
 
       if (this.props.user.role === 1) {
         return (
-          <ProfessorApp />
+          <MuiThemeProvider>
+            <ProfessorApp />
+          </MuiThemeProvider>
+
         );
       }
 
       if (this.props.user.role === 2) {
         return (
           <div>
-            <StudentApp />
+            <MuiThemeProvider>
+              <StudentApp />
+            </MuiThemeProvider>
           </div>
         );
       }

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import * as _ from 'lodash';
 import '../../styles/scss/course.scss';
 import {
   Table,
@@ -13,6 +14,7 @@ import {
 //TODO: Fetch instructor name and count questions to display in table
 const renderContents = (courses) => {
   return courses.map(course => {
+    console.log(course)
     return (
       <TableRow key={course._id}>
         <TableRowColumn>
@@ -24,8 +26,8 @@ const renderContents = (courses) => {
           </Link>
         </TableRowColumn>
         <TableRowColumn>{course.instructorName}</TableRowColumn>
-        <TableRowColumn>1</TableRowColumn>
-        <TableRowColumn>20</TableRowColumn>
+        <TableRowColumn>{course.participants.length}</TableRowColumn>
+        <TableRowColumn>{course.questions.length}</TableRowColumn>
       </TableRow>
     );
   });

@@ -29,7 +29,6 @@ class CourseJoin extends Component {
   }
 
   submitHandler() {
-    console.log(this.props);
     this.props.joinCourse(this.props.formValues, this.props.history);
   }
 

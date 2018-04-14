@@ -8,16 +8,17 @@ import * as _ from 'lodash';
 
 class QuestionList extends Component {
   renderQuestions() {
-    var course = this.props.course || this.props.courseAfterVote;
-    var questions = this.props.questions || course.questions;
+    var questions = this.props.course.questions;
 
+    console.log('QuestionList - questions: ', questions);
+    console.log('QuestionList - course: ', this.props.course);
     // TODO: Priority algorithm
     questions = _.orderBy(questions, ['upVote', 'downVote'], ['desc', 'asc']);
 
     return questions.map(question => {
       return (
         <div key={question._id}>
-          <Question question={question} course={course} user={this.props.user} />
+          <Question question={question} course={this.props.course} user={this.props.user} />
         </div>
       );
     });
@@ -26,7 +27,7 @@ class QuestionList extends Component {
   render() {
     return (
       <div>
-        <h3>Questions</h3>
+        <h3 style={{display:'block', width:'100%', textAlign:'center'}}>Questions</h3>
         {this.renderQuestions()}
       </div>
     );

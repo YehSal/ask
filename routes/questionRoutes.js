@@ -3,25 +3,27 @@
  * subdocument of courses and therefore courseIDs are necessary to find questions
  */
 const mongoose = require('mongoose');
-const requireLogin = require('../middlewares/requireLogin');
 const _ = require('lodash');
 var moment = require('moment-timezone');
-
+const requireLogin = require('../middlewares/requireLogin');
 const Course = mongoose.model('courses');
 
 module.exports = app => {
-  // TODO: Send appropriate errors for upvote and downvote, user can't vote on his/her question
+  /*
+   * Upvote a question
+   * Users can't vote on their own questions
+   * Users can only vote once on others' questions
+   */
   app.post('/api/course/:courseID/question/:questionID/upVote', requireLogin, async(req, res) => {
     const { courseID, questionID } = req.params;
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
 
-    // Send an error to the user that they can't upvote a question they posted
-    // if (question._user == req.user._id) {
-    //   res.send(course);
-    // }
+    if (_.isEqual(question._user, req.user._id)) {
+      console.log('here');
+      res.status(401).send({ error: "You can't vote on your own question" });
+    }
 
-    // User already upvoted
     if (_.some(question.usersUpVoted, req.user._id)) {
       res.send(course);
     }
@@ -36,23 +38,25 @@ module.exports = app => {
 
     try {
       await course.save();
-      res.send(course.questions);
+      res.send(course);
     } catch (err) {
       res.status(422).send(err);
     }
   });
 
-  app.post('/api/course/:courseID/question/:questionID/downVote', requireLogin, async(req, res) => {
+  /*
+   * Downvote a question
+   * Same logic as upvoting
+   */
+   app.post('/api/course/:courseID/question/:questionID/downVote', requireLogin, async(req, res) => {
     const { courseID, questionID } = req.params;
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
 
-    // Send an error to the user that they can't upvote a question they posted
-    // if (question._user == req.user._id) {
-    //   res.send(course);
-    // }
+    if (_.isEqual(question._user, req.user._id)) {
+      res.status(401).send({ error: "You can't vote on your own question" });
+    }
 
-    // User already upvoted
     if (_.some(question.usersUpVoted, req.user._id)) {
       question.upVote -= 1;
       question.usersUpVoted.pop(req.user.id);
@@ -67,7 +71,53 @@ module.exports = app => {
 
     try {
       await course.save();
-      res.send(course.questions);
+      res.send(course);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  // Create a question
+  app.post('/api/course/:id/questions', requireLogin, async(req, res) => {
+    const { values } = req.body.params;
+    const courseID  = req.params.id;
+    const course = await Course.findById(courseID);
+    const question = {
+      body: values.questionBody,
+      _user: req.user.id,
+    };
+
+    course.questions.push(question);
+
+    try {
+      await course.save();
+      res.send(course);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
+
+  /*
+   * Delete a question
+   * Professors can delete any question, students can only delete their own questions
+   */
+  app.delete('/api/course/:courseID/question/:questionID', requireLogin, async (req, res) => {
+    const { courseID, questionID } = req.params;
+    const course = await Course.findById(courseID);
+    const question = course.questions.find(question => question._id == questionID)
+    console.log(question);
+
+    if (req.user.role == 2) {
+      if (!_.isEqual(req.user._id, question._user)) {
+        res.status(401).send({ error: "You can only delete your questions" });
+      }
+    }
+
+    course.questions = course.questions.filter(question => question._id != req.params.questionID);
+
+    try {
+      course.save();
+      res.send(course);
     } catch (err) {
       res.status(422).send(err);
     }

@@ -10,5 +10,4 @@ export default combineReducers({
   form: reduxForm,
   courses: coursesReducer,
   course: findCourseReducer,
-  questions: questionsReducer
 });

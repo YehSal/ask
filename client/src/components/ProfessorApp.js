@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import HeaderProfessor from './header/HeaderProfessor';
 import Landing from './Landing';
 import Dashboard from './Dashboard';
@@ -9,7 +8,6 @@ import CourseContainer from './courses/CourseContainer';
 
 const ProfessorApp = () => {
   return (
-    <MuiThemeProvider>
       <div>
         <BrowserRouter>
           <div>
@@ -21,7 +19,6 @@ const ProfessorApp = () => {
           </div>
         </BrowserRouter>
       </div>
-    </MuiThemeProvider>
   );
 }
 

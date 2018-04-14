@@ -3,7 +3,7 @@ import CourseListContainer from './courses/CourseListContainer';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import ContentAdd from 'material-ui/svg-icons/content/add';
 import Paper from 'material-ui/Paper';
-import { hOneStyle } from '../styles/base';
+import { hOneStyleVanilla } from '../styles/base';
 
 
 const style = {
@@ -15,9 +15,7 @@ const style = {
 const Dashboard = () => {
   return (
     <div>
-      <Paper zDepth={2} style={hOneStyle}>
-        <h1>Dashboard</h1>
-      </Paper>
+      <h1 style={{textAlign: 'center'}}>Dashboard</h1>
       <CourseListContainer />
       <div style={style}>
         <FloatingActionButton href='/courses/new'>

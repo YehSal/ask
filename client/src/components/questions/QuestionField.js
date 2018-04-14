@@ -11,9 +11,10 @@ export default ({ input, label, meta: { error, touched } }) => {
       <TextField
         hintText="What is the difference between BFS and DFS?"
         floatingLabelText="Type Question Here"
-        multiLine={true}
+        multiLine={false}
         rows={1}
         errorText={touched && error}
+        fullWidth={true}
         {...input}
       />
     </div>

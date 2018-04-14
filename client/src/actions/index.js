@@ -55,7 +55,7 @@ export const fetchQuestions = courseID => async dispatch => {
     params: { courseID }
   });
 
-  dispatch({ type: FETCH_QUESTIONS, payload: res.data.questions });
+  dispatch({ type: FETCH_QUESTIONS, payload: res.data });
 };
 
 export const castUpVote = (courseID, questionID) => async dispatch => {
@@ -80,7 +80,11 @@ export const joinCourse = (values, history) => async dispatch => {
   const res = await axios.get(`/api/course/joinCourse/${values.coursePassword}`);
   const courseID = res.data._id;
 
-  history.push(`/course/${courseID}`);
+  console.log('action, course retrieved: ', res.data);
+  history.push({
+    pathname: `/course/${courseID}`,
+    state: { courseID }
+  });
 
   dispatch({ type: JOIN_COURSE, payload: res.data });
 }
