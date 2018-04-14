@@ -105,7 +105,6 @@ module.exports = app => {
     const { courseID, questionID } = req.params;
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
-    console.log(question);
 
     if (req.user.role == 2) {
       if (!_.isEqual(req.user._id, question._user)) {
