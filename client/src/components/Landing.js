@@ -1,22 +1,31 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
-import { hOneStyleGreen } from '../styles/base';
+import { withRouter } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
+import './base.css';
 
 //TODO: Button is going to be Join/create class based on user role
-const subHeaderStyle = {
-  fontSize: 15,
-  weight:300,
-  fontFamily: 'Open Sans'
-}
 
-const Landing = () => {
+const Landing = ({ history }) => {
   return(
-    <div style={{ textAlign: 'center' }}>
-      <h1>Efficient, organized way <br/> to ask questions</h1>
-      <h2 style={subHeaderStyle}>We reenvisioned the classroom experience using backchannel</h2>
-      <button>Join Class</button>
+    <div className="header">
+      <div className="text-box">
+        <h1 className="header-primary">
+          <span className="header-primary-main">
+            QME
+          </span>
+          <span className="header-primary-sub">
+            the best way to ask questions
+          </span>
+        </h1>
+        <RaisedButton
+          className="btn-animated btn"
+          label="Join Class"
+          onClick={() => history.push('/courses/join')}
+        />
+      </div>
     </div>
   );
 };
 
-export default Landing;
+export default withRouter(Landing);

@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAGA,UAAW;EACT,IAAI,EAAE,0BAAgB;EACtB,KAAK,EAJS,IAAI",
+"sources": ["../../../client/src/styles/scss/course.scss"],
+"names": [],
+"file": "course.css"
+}
