@@ -106,14 +106,39 @@ module.exports = app => {
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
 
-    console.log('HERE');
     if (req.user.role == 2) {
       if (!_.isEqual(req.user._id, question._user)) {
-        res.status(401).send({ error: "You can only delete your questions" });
+        return res.status(401).send({ error: "You can only delete your questions" });
       }
     }
 
     course.questions = course.questions.filter(question => question._id != req.params.questionID);
+
+    try {
+      course.save();
+      res.send(course);
+    } catch (err) {
+      res.status(422).send(err);
+    }
+  });
+
+  /*
+   * Update a question
+   * Professors can update any question, students can only update their own questions
+   */
+  app.put('/api/course/:courseID/question/:questionID', requireLogin, async (req, res) => {
+    const { courseID, questionID } = req.params;
+    const course = await Course.findById(courseID);
+    var question = course.questions.find(question => question._id == questionID)
+    const values = req.body.params.values;
+
+    if (req.user.role == 2) {
+      if (!_.isEqual(req.user._id, question._user)) {
+        return res.status(401).send({ error: "You can only update your questions" });
+      }
+    }
+
+    question.body = values.questionBody;
 
     try {
       course.save();

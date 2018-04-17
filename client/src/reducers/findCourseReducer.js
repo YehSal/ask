@@ -3,6 +3,7 @@ import {
   JOIN_COURSE,
   FETCH_QUESTIONS,
   SUBMIT_QUESTION,
+  EDIT_QUESTION,
   CAST_UPVOTE,
   CAST_DOWNVOTE,
   DELETE_QUESTION
@@ -23,6 +24,8 @@ export default function(state=null, action) {
     case CAST_DOWNVOTE:
       return action.payload;
     case DELETE_QUESTION:
+      return action.payload;
+    case EDIT_QUESTION:
       return action.payload;
     default:
       return state;

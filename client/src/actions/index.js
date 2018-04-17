@@ -5,6 +5,7 @@ import {
   FIND_COURSE,
   SUBMIT_QUESTION,
   DELETE_QUESTION,
+  EDIT_QUESTION,
   FETCH_QUESTIONS,
   CAST_UPVOTE,
   CAST_DOWNVOTE,
@@ -90,6 +91,16 @@ export const deleteQuestion = (courseID, questionID) => async dispatch => {
   const res = await axios.delete(`/api/course/${courseID}/question/${questionID}`);
 
   dispatch({ type: DELETE_QUESTION, payload: res.data });
+};
+
+export const editQuestion = (courseID, questionID, values) => async dispatch => {
+  const res = await axios.put(`/api/course/${courseID}/question/${questionID}`, {
+    params: {
+      values
+    }
+  });
+
+  dispatch({ type: EDIT_QUESTION, payload: res.data });
 };
 
 export const castUpVote = (courseID, questionID) => async dispatch => {
