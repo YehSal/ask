@@ -76,47 +76,53 @@ body {
     opacity: 1;
     transform: translate(0); } }
 
-.btn:link,
-.btn:visited {
-  text-transform: uppercase;
-  text-decoration: none;
-  padding: 15px 40px;
-  display: inline-block;
-  border-radius: 100px;
-  transition: all .2s;
-  position: relative; }
-
-.btn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); }
-
-.btn:active {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); }
-
-.btn-white {
-  background-color: #fff;
-  color: #777; }
-
-.btn::after {
-  content: "";
-  display: inline-block;
-  height: 100%;
-  width: 100%;
-  border-radius: 100px;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-  transition: all .4s; }
-
-.btn-white::after {
-  background-color: #fff; }
-
-.btn:hover::after {
-  transform: scaleX(1.4) scaleY(1.6);
-  opacity: 0; }
+.btn-landing {
+  margin: 10px;
+  width: 200px;
+}
 
 .btn-animated {
   animation: moveInBottom .5s ease-out .75s;
-  animation-fill-mode: backwards; }
+  animation-fill-mode: backwards;
+}
+
+.question-container {
+  padding-right: 40px;
+  margin-bottom: 10px;
+  background-color: #F5F5F5	;
+  text-align: 'center';
+  display: block;
+}
+
+.question-item {
+  position: relative;
+  text-align:'left';
+  word-wrap: break-word;
+}
+
+.question-upvote-btn {
+  display: block;
+  position: relative;
+  margin-bottom: 4px;
+  top: 100%;
+  left: 95%;
+}
+
+.question-downvote-btn {
+  display: block;
+  position: relative;
+  top: 100%;
+  left: 95%;
+}
+
+.question-delete-btn {
+  display: inline;
+  position: relative;
+  left: 50%;
+}
+
+.question-edit-btn {
+  position: relative;
+  display: inline;
+  left: 51%;
+}

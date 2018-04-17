@@ -10,9 +10,6 @@ class QuestionList extends Component {
   renderQuestions() {
     var questions = this.props.course.questions;
 
-    console.log('QuestionList - questions: ', questions);
-    console.log('QuestionList - course: ', this.props.course);
-    // TODO: Priority algorithm
     questions = _.orderBy(questions, ['upVote', 'downVote'], ['desc', 'asc']);
 
     return questions.map(question => {

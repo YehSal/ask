@@ -14,15 +14,15 @@ module.exports = app => {
    * Users can't vote on their own questions
    * Users can only vote once on others' questions
    */
+   // TODO: Uncomment the part that disallows students to vote on their own questions
   app.post('/api/course/:courseID/question/:questionID/upVote', requireLogin, async(req, res) => {
     const { courseID, questionID } = req.params;
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
 
-    if (_.isEqual(question._user, req.user._id)) {
-      console.log('here');
-      res.status(401).send({ error: "You can't vote on your own question" });
-    }
+    // if (_.isEqual(question._user, req.user._id)) {
+    //   res.status(401).send({ error: "You can't vote on your own question" });
+    // }
 
     if (_.some(question.usersUpVoted, req.user._id)) {
       res.send(course);
@@ -53,9 +53,9 @@ module.exports = app => {
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
 
-    if (_.isEqual(question._user, req.user._id)) {
-      res.status(401).send({ error: "You can't vote on your own question" });
-    }
+    // if (_.isEqual(question._user, req.user._id)) {
+    //   res.status(401).send({ error: "You can't vote on your own question" });
+    // }
 
     if (_.some(question.usersUpVoted, req.user._id)) {
       question.upVote -= 1;

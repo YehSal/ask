@@ -3,8 +3,6 @@ import Paper from 'material-ui/Paper';
 import { withRouter } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
 
-//TODO: Button is going to be Join/create class based on user role
-
 const Landing = ({ history }) => {
   return(
     <div className="header">
