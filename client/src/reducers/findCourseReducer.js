@@ -4,7 +4,8 @@ import {
   FETCH_QUESTIONS,
   SUBMIT_QUESTION,
   CAST_UPVOTE,
-  CAST_DOWNVOTE
+  CAST_DOWNVOTE,
+  DELETE_QUESTION
 } from '../actions/types';
 
 export default function(state=null, action) {
@@ -20,6 +21,8 @@ export default function(state=null, action) {
     case CAST_UPVOTE:
       return action.payload;
     case CAST_DOWNVOTE:
+      return action.payload;
+    case DELETE_QUESTION:
       return action.payload;
     default:
       return state;

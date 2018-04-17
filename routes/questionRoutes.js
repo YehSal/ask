@@ -106,6 +106,7 @@ module.exports = app => {
     const course = await Course.findById(courseID);
     const question = course.questions.find(question => question._id == questionID)
 
+    console.log('HERE');
     if (req.user.role == 2) {
       if (!_.isEqual(req.user._id, question._user)) {
         res.status(401).send({ error: "You can only delete your questions" });

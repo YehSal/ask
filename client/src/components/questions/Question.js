@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { castUpVote, castDownVote } from '../../actions';
+import { castUpVote, castDownVote, deleteQuestion } from '../../actions';
 import * as _ from 'lodash';
 import RaisedButton from 'material-ui/RaisedButton';
 import { List, ListItem } from 'material-ui/List';
@@ -82,32 +82,22 @@ class Question extends Component {
           </RaisedButton>
         </div>
         <div className="question-delete-btn">
-          <FloatingActionButton mini={true} secondary={true}>
+          <FloatingActionButton
+            mini={true}
+            secondary={true}
+            onClick={() => this.props.deleteQuestion(this.props.course._id, this.props.question._id)}
+          >
             <Clear />
           </FloatingActionButton>
-
         </div>
         <div className="question-edit-btn">
           <FloatingActionButton mini={true}>
             <Edit />
           </FloatingActionButton>
         </div>
-        {/* {this.renderVotingButtons()} */}
-
-        {/* <List>
-          <ListItem
-            className={'question-item'}
-            disabled={true}
-            primaryText={this.props.question.body}
-            disableKeyboardFocus={false}
-            rightIcon={this.renderRightIcon()}
-          />
-          <Divider />
-
-        </List> */}
       </div>
     );
   }
 }
 
-export default connect(null, { castUpVote, castDownVote })(Question);
+export default connect(null, { castUpVote, castDownVote, deleteQuestion })(Question);
