@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { reduxForm, Field } from 'redux-form';
+import { reduxForm, Field, reset } from 'redux-form';
 import QuestionField from '../questions/QuestionField';
 import { submitQuestion } from '../../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import Done from 'material-ui/svg-icons/action/done';
 
+const afterSubmit = (result, dispatch) => {
+  dispatch(reset('questionForm'));
+}
 
 class QuestionForm extends Component {
   constructor(props) {
@@ -65,14 +68,16 @@ function validate(values) {
 function mapStateToProps(state) {
   return {
     course: state.course,
-    question: state.question,
     formValues: state.form.questionForm ? state.form.questionForm.values : false,
-    questions: state.questions
+    initialValues: {
+      questionBody: 'bla'
+    }
   };
 }
 
 export default reduxForm({
   validate,
   form: 'questionForm',
-  destroyOnUnmount: false
+  destroyOnUnmount: false,
+  onSubmitSuccess: afterSubmit
 })(connect(mapStateToProps, { submitQuestion })(QuestionForm))
