@@ -8,7 +8,6 @@ import Loader from '../Loader';
 import Course from './Course';
 import QuestionForm from '../questions/QuestionForm';
 import QuestionList from '../questions/QuestionList';
-import QuestionListContainer from '../questions/QuestionListContainer';
 
 class CourseContainer extends Component {
   // CourseID Depends on whether the user was redirected after creating a new
@@ -28,10 +27,6 @@ class CourseContainer extends Component {
             course={this.props.course}
             renderPassword={this.renderPassword}
           />
-          {/* <QuestionListContainer
-            course={this.props.course}
-            user={this.props.user}
-          /> */}
           <QuestionList
             course={this.props.course}
             user={this.props.user}

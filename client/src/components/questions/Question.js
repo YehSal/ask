@@ -3,20 +3,15 @@ import { connect } from 'react-redux';
 import { castUpVote, castDownVote, deleteQuestion, editQuestion } from '../../actions';
 import * as _ from 'lodash';
 import RaisedButton from 'material-ui/RaisedButton';
-import { List, ListItem } from 'material-ui/List';
 import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
-import Divider from 'material-ui/Divider';
 import Dialog from 'material-ui/Dialog';
-import { ButtonStyle, ListStyle } from '../../styles/base';
+import { ButtonStyle } from '../../styles/base';
 import '../../styles/index.css';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
-import FlatButton from 'material-ui/FlatButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 import Edit from 'material-ui/svg-icons/content/create';
-import { reduxForm, Field } from 'redux-form';
 import QuestionEditForm from './QuestionEditForm';
-import Done from 'material-ui/svg-icons/action/done';
 
 class Question extends Component {
   constructor(props) {
@@ -44,7 +39,7 @@ class Question extends Component {
   }
 
   handleDisableEditDelete() {
-    if (this.props.user.role == 2 && this.props.question._user != this.props.user._id)
+    if (this.props.user.role === 2 && this.props.question._user !== this.props.user._id)
       return true;
 
     return false;

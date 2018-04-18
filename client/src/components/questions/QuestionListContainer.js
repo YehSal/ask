@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { fetchQuestions } from '../../actions';
 import Loader from '../Loader';
 import QuestionList from './QuestionList';
-import QuestionForm from './QuestionForm';
 
 class QuestionListContainer extends Component {
   // CourseID Depends on whether the user was redirected after creating a new
@@ -13,9 +12,7 @@ class QuestionListContainer extends Component {
   }
 
   renderContents() {
-    // console.log('QuestionListContainer - before: ', this.props.course);
     if (this.props.course) {
-      // console.log('QuestionListContainer: ', this.props.questions);
       return (
         <div>
           <QuestionList
@@ -33,7 +30,6 @@ class QuestionListContainer extends Component {
     return(
       <div>
         {this.renderContents()}
-        {/* <QuestionForm /> */}
       </div>
     )
   }

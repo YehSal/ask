@@ -1,6 +1,5 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import RaisedButton from 'material-ui/RaisedButton';
 
 const Landing = ({ history }) => {
   return(
@@ -14,11 +13,6 @@ const Landing = ({ history }) => {
             the best way to ask questions
           </span>
         </h1>
-        <RaisedButton
-          className="btn-animated btn"
-          label="Join Class"
-          onClick={() => history.push('/courses/join')}
-        />
       </div>
     </div>
   );

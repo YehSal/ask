@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import * as _ from 'lodash';
 import '../../styles/scss/course.scss';
 import {
   Table,
