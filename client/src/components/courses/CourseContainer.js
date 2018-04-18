@@ -11,19 +11,17 @@ import QuestionList from '../questions/QuestionList';
 import io from 'socket.io-client';
 import { socketURI } from '../../config/keys.js';
 
-var socket = io(socketURI);
+const socket = io(socketURI);
 
 class CourseContainer extends Component {
   constructor(props) {
     super(props);
 
-    socket.on('question:received', payload => {
-      console.log('Received questions');
+    socket.on('questions:changed', payload => {
       this.props.findCourse(payload.courseID);
-      console.log(this.props.course);
     });
   }
-  
+
   // CourseID Depends on whether the user was redirected after creating a new
   // course or the user clicked a link in the dashboard or somewhere else in the app
   componentDidMount() {
@@ -32,9 +30,7 @@ class CourseContainer extends Component {
       this.props.findCourse(courseID);
       this.props.fetchUser();
     } else {
-      socket.emit('course', {
-        courseID: this.props.course._id
-      });
+      socket.emit('course', { courseID: this.props.course._id });
     }
   }
 
@@ -45,9 +41,7 @@ class CourseContainer extends Component {
   }
 
   componentWillUnmount() {
-    socket.emit('course:leave', {
-      courseID: this.props.course._id
-    })
+    socket.emit('course:leave', { courseID: this.props.course._id });
   }
 
   renderContents() {

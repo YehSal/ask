@@ -57,8 +57,8 @@ io.on('connection', socket => {
     socket.leave(data.courseID);
   });
 
-  socket.on('question:new', data => {
-    socket.broadcast.emit('question:received', data);
+  socket.on('questions:change', data => {
+    socket.broadcast.emit('questions:changed', data);
   });
 })
 

@@ -1,4 +1,6 @@
 import axios from 'axios';
+import io from 'socket.io-client';
+import { socketURI } from '../config/keys.js';
 import {
   FETCH_USER,
   FETCH_COURSES,
@@ -12,6 +14,8 @@ import {
   CHOOSE_ROLE,
   JOIN_COURSE
 } from './types';
+
+const socket = io(socketURI);
 
 /*
  * AUTH ACTIONS
@@ -76,7 +80,9 @@ export const submitQuestion = (values, courseID, fetchQuestions) => async dispat
     }
   });
 
-  dispatch({ type: SUBMIT_QUESTION, payload: res.data });
+  await dispatch({ type: SUBMIT_QUESTION, payload: res.data });
+
+  socket.emit('questions:change', { courseID });
 };
 
 export const fetchQuestions = courseID => async dispatch => {
@@ -90,7 +96,9 @@ export const fetchQuestions = courseID => async dispatch => {
 export const deleteQuestion = (courseID, questionID) => async dispatch => {
   const res = await axios.delete(`/api/course/${courseID}/question/${questionID}`);
 
-  dispatch({ type: DELETE_QUESTION, payload: res.data });
+  await dispatch({ type: DELETE_QUESTION, payload: res.data });
+
+  socket.emit('questions:change', { courseID });
 };
 
 export const editQuestion = (courseID, questionID, values) => async dispatch => {
@@ -100,17 +108,23 @@ export const editQuestion = (courseID, questionID, values) => async dispatch => 
     }
   });
 
-  dispatch({ type: EDIT_QUESTION, payload: res.data });
+  await dispatch({ type: EDIT_QUESTION, payload: res.data });
+
+  socket.emit('questions:change', { courseID });
 };
 
 export const castUpVote = (courseID, questionID) => async dispatch => {
   const res = await axios.post(`/api/course/${courseID}/question/${questionID}/upVote`);
 
-  dispatch({ type: CAST_UPVOTE, payload: res.data });
+  await dispatch({ type: CAST_UPVOTE, payload: res.data });
+
+  socket.emit('questions:change', { courseID });
 };
 
 export const castDownVote = (courseID, questionID) => async dispatch => {
   const res = await axios.post(`/api/course/${courseID}/question/${questionID}/downVote`);
 
-  dispatch({ type: CAST_DOWNVOTE, payload: res.data });
+  await dispatch({ type: CAST_DOWNVOTE, payload: res.data });
+
+  socket.emit('questions:change', { courseID });
 };

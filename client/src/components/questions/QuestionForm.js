@@ -5,10 +5,6 @@ import QuestionField from '../questions/QuestionField';
 import { submitQuestion } from '../../actions';
 import RaisedButton from 'material-ui/RaisedButton';
 import Done from 'material-ui/svg-icons/action/done';
-import io from 'socket.io-client';
-import { socketURI } from '../../config/keys.js';
-
-var socket = io(socketURI);
 
 const afterSubmit = (result, dispatch) => {
   dispatch(reset('questionForm'));
@@ -21,17 +17,12 @@ class QuestionForm extends Component {
     this.submitHandler = this.submitHandler.bind(this);
   }
 
-  async submitHandler() {
-    await this.props.submitQuestion(
+  submitHandler() {
+    this.props.submitQuestion(
       this.props.formValues,
       this.props.course._id,
       this.props.fetchQuestions
     );
-
-    console.log('Submit question');
-    socket.emit('question:new', {
-      courseID: this.props.course._id
-    });
   }
 
   renderFields() {
