@@ -25,7 +25,7 @@ module.exports = app => {
     // }
 
     if (_.some(question.usersUpVoted, req.user._id)) {
-      res.send(course);
+      return res.status(403).send({ error: 'You can only vote once on a question' });
     }
 
     if (_.some(question.usersDownVoted, req.user._id)) {
@@ -57,13 +57,13 @@ module.exports = app => {
     //   res.status(401).send({ error: "You can't vote on your own question" });
     // }
 
+    if (_.some(question.usersDownVoted, req.user._id)) {
+      return res.status(403).send({ error: 'You can only vote once on a question' });
+    }
+
     if (_.some(question.usersUpVoted, req.user._id)) {
       question.upVote -= 1;
       question.usersUpVoted.pop(req.user.id);
-    }
-
-    if (_.some(question.usersDownVoted, req.user._id)) {
-      res.send(course);
     }
 
     question.downVote += 1;
