@@ -36,8 +36,9 @@ passport.use(
       email: profile.emails[0].value,
       firstName: _.capitalize(profile.name.givenName),
       lastName: _.capitalize(profile.name.familyName)
-    }).save()
+    }).save();
 
+    console.log('HERE123');
     done(null, user);
   })
 );
