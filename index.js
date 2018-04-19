@@ -37,6 +37,10 @@ app.use(passport.session());
  * Handle routes
  * require will return a function that we just pass app to as an argument
  */
+app.get('/', function(request, response) {
+  response.send('Hello World!');
+});
+
 require('./routes/authRoutes')(app);
 require('./routes/courseRoutes')(app);
 require('./routes/questionRoutes')(app);
