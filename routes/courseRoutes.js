@@ -4,6 +4,7 @@ var moment = require('moment-timezone');
 const requireLogin = require('../middlewares/requireLogin');
 const requireProfessor = require('../middlewares/requireProfessor');
 const Course = mongoose.model('courses');
+const sendEmails = require('../jobs/sendEmails');
 
 module.exports = app => {
   /*
@@ -84,7 +85,7 @@ module.exports = app => {
   });
 
   // Find course given password
-  app.get('/api/course/joinCourse/:password', requireLogin, async(req, res) => {
+  app.get('/api/course/joinCourse/:password', requireLogin, async (req, res) => {
     const course = await Course.findOne({ password: req.params.password });
 
     try {
@@ -92,5 +93,29 @@ module.exports = app => {
     } catch (err) {
       res.status(422).send(err);
     }
+  });
+
+  app.post('/api/course/:id/sendEmails', requireLogin, requireProfessor, async (req, res) => {
+    try {
+      const course = await Course.findById(req.params.id);
+
+      if (course.sentQuestions) {
+        return res.send({ message: 'Already emailed questions to participants before' });
+      }
+
+      try {
+        sendEmails(course);
+        course.sentQuestions = true;
+        await course.save()
+
+        res.status(200).send(course);
+      } catch (err) {
+        res.status(422).send(err);
+      }
+
+    } catch (err) {
+      res.status(422).send(err);
+    }
+
   });
 };

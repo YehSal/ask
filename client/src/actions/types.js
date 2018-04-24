@@ -9,3 +9,4 @@ export const CAST_UPVOTE = 'cast_upvote';
 export const CAST_DOWNVOTE = 'cast_downvote';
 export const CHOOSE_ROLE = 'choose_role';
 export const JOIN_COURSE = 'join_course';
+export const SEND_EMAILS = 'send_emails';

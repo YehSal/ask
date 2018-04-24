@@ -38,7 +38,6 @@ passport.use(
       lastName: _.capitalize(profile.name.familyName)
     }).save();
 
-    console.log('HERE123');
     done(null, user);
   })
 );

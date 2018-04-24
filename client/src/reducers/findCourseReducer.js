@@ -6,7 +6,8 @@ import {
   EDIT_QUESTION,
   CAST_UPVOTE,
   CAST_DOWNVOTE,
-  DELETE_QUESTION
+  DELETE_QUESTION,
+  SEND_EMAILS
 } from '../actions/types';
 
 export default function(state=null, action) {
@@ -26,6 +27,8 @@ export default function(state=null, action) {
     case DELETE_QUESTION:
       return action.payload;
     case EDIT_QUESTION:
+      return action.payload;
+    case SEND_EMAILS:
       return action.payload;
     default:
       return state;

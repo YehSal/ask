@@ -12,7 +12,8 @@ import {
   CAST_UPVOTE,
   CAST_DOWNVOTE,
   CHOOSE_ROLE,
-  JOIN_COURSE
+  JOIN_COURSE,
+  SEND_EMAILS
 } from './types';
 
 const socket = io(socketURI);
@@ -39,8 +40,9 @@ export const createCourse = (values, history) => async dispatch => {
   const res = await axios.post('/api/courses', values);
   const courseID = res.data._id;
 
+  await dispatch({ type: FIND_COURSE, payload: res.data });
+
   history.push(`/course/${courseID}`);
-  dispatch({ type: FETCH_USER, payload: res.data });
 };
 
 export const fetchCourses = () => async dispatch => {
@@ -128,3 +130,14 @@ export const castDownVote = (courseID, questionID) => async dispatch => {
 
   socket.emit('questions:change', { courseID });
 };
+
+/*
+ * Send emails
+ */
+
+export const sendEmails = courseID => async dispatch => {
+  console.log('here');
+  const res = await axios.post(`/api/course/${courseID}/sendEmails`);
+
+  dispatch({ type: SEND_EMAILS, payload: res.data });
+}

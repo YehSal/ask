@@ -3,13 +3,17 @@
  */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { findCourse, fetchUser } from '../../actions';
+import { findCourse, fetchUser, sendEmails } from '../../actions';
 import Loader from '../Loader';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
 import Course from './Course';
 import QuestionForm from '../questions/QuestionForm';
 import QuestionList from '../questions/QuestionList';
 import io from 'socket.io-client';
 import { socketURI } from '../../config/keys.js';
+import Divider from 'material-ui/Divider';
+import Dialog from 'material-ui/Dialog';
 
 const socket = io(socketURI);
 
@@ -17,9 +21,28 @@ class CourseContainer extends Component {
   constructor(props) {
     super(props);
 
+    this.state = { open: false };
+
+    this.handleOpen = this.handleOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+
     socket.on('questions:changed', payload => {
       this.props.findCourse(payload.courseID);
     });
+  }
+
+  handleOpen() {
+    this.setState({ open: true });
+  }
+
+  handleClose() {
+    this.setState({ open: false });
+  }
+
+  handleSubmit() {
+    this.props.sendEmails(this.props.course._id);
+    this.handleClose();
   }
 
   // CourseID Depends on whether the user was redirected after creating a new
@@ -56,6 +79,7 @@ class CourseContainer extends Component {
             course={this.props.course}
             user={this.props.user}
           />
+
         </div>
       );
     }
@@ -63,11 +87,61 @@ class CourseContainer extends Component {
     return <Loader />;
   }
 
+
+
+  renderDialog() {
+    const actions = [
+          <FlatButton
+            label="Cancel"
+            primary={true}
+            onClick={this.handleClose}
+          />,
+          <FlatButton
+            label="Yes"
+            primary={true}
+            keyboardFocused={true}
+            onClick={this.handleSubmit}
+          />,
+        ];
+    return (
+      <Dialog
+        title="End Session and Send Emails"
+        actions={actions}
+        modal={false}
+        open={this.state.open}
+        onRequestClose={this.handleClose}
+      >
+        Are you sure you want to end this session? This will send the questions via email to all the participants
+      </Dialog>
+    );
+  }
+
+  renderBasedonRole() {
+    if (this.props.user.role === 2)
+      return <QuestionForm />
+
+    if (this.props.user.role === 1) {
+      return (
+        <div style={{textAlign: 'center', marginTop:5}}>
+          <Divider style={{display: 'block', width: '100%', marginTop:10, marginBottom:10}} />
+          {this.renderDialog()}
+          <RaisedButton
+            label="End Session"
+            secondary={true}
+            onClick={this.handleOpen}
+            fullWidth={true}
+            disabled={this.props.course ? this.props.course.sentQuestions : false}
+          />
+        </div>
+      );
+    }
+  }
+
   render() {
     return(
       <div>
         {this.renderContents()}
-        <QuestionForm />
+        {this.renderBasedonRole()}
       </div>
     )
   }
@@ -82,5 +156,6 @@ function mapStateToProps(state) {
 
 export default connect(mapStateToProps, {
   findCourse,
-  fetchUser
+  fetchUser,
+  sendEmails
 })(CourseContainer);

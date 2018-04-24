@@ -36,7 +36,7 @@ class HeaderStudent extends Component {
 
     return(
       <AppBar
-        title={<span style={styles.title}>Qme</span>}
+        title={<span style={styles.title}>QME</span>}
         onTitleClick={this.handleTitleClick}
         iconElementRight={this.renderButton()}
         showMenuIconButton={false}
