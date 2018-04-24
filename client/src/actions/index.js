@@ -42,7 +42,10 @@ export const createCourse = (values, history) => async dispatch => {
 
   await dispatch({ type: FIND_COURSE, payload: res.data });
 
-  history.push(`/course/${courseID}`);
+  history.push({
+    pathname: `/course/${courseID}`,
+    state: { courseID }
+  });
 };
 
 export const fetchCourses = () => async dispatch => {

@@ -45,6 +45,47 @@ class Question extends Component {
     return false;
   }
 
+  renderDelete() {
+    if (this.props.user.role == 1 || (this.props.user.role == 2 && !this.props.course.sentQuestions)) {
+      return (
+        <div className="question-delete-btn">
+          <FloatingActionButton
+            mini={true}
+            secondary={true}
+            onClick={() => this.props.deleteQuestion(this.props.course._id, this.props.question._id)}
+            disabled={this.handleDisableEditDelete()}
+          >
+            <Clear />
+          </FloatingActionButton>
+        </div>
+      );
+    }
+  }
+
+  renderEdit() {
+    if (this.props.user.role == 1 || (this.props.user.role == 2 && !this.props.course.sentQuestions)) {
+      return (
+        <div className="question-edit-btn">
+          <FloatingActionButton
+            mini={true}
+            onClick={this.handleOpen}
+            disabled={this.handleDisableEditDelete()}
+          >
+            <Edit />
+          </FloatingActionButton>
+          <Dialog
+            title="Edit Question"
+            modal={false}
+            open={this.state.open}
+            onRequestClose={this.handleClose}
+          >
+            <QuestionEditForm question={this.props.question} course={this.props.course} open={this.state.open}/>
+          </Dialog>
+        </div>
+      )
+    }
+  }
+
   render() {
     return (
       <div className="question-container">
@@ -74,33 +115,8 @@ class Question extends Component {
           >
           </RaisedButton>
         </div>
-        <div className="question-delete-btn">
-          <FloatingActionButton
-            mini={true}
-            secondary={true}
-            onClick={() => this.props.deleteQuestion(this.props.course._id, this.props.question._id)}
-            disabled={this.handleDisableEditDelete()}
-          >
-            <Clear />
-          </FloatingActionButton>
-        </div>
-        <div className="question-edit-btn">
-          <FloatingActionButton
-            mini={true}
-            onClick={this.handleOpen}
-            disabled={this.handleDisableEditDelete()}
-          >
-            <Edit />
-          </FloatingActionButton>
-          <Dialog
-            title="Edit Question"
-            modal={false}
-            open={this.state.open}
-            onRequestClose={this.handleClose}
-          >
-            <QuestionEditForm question={this.props.question} course={this.props.course} open={this.state.open}/>
-          </Dialog>
-        </div>
+        {this.renderDelete()}
+        {this.renderEdit()}
       </div>
     );
   }
@@ -112,6 +128,5 @@ function mapStateToProps(state, props) {
     formValues: state.form.questionEditForm ? state.form.questionEditForm.values : false
   };
 }
-
 
 export default connect(mapStateToProps, { castUpVote, castDownVote, deleteQuestion, editQuestion })(Question);
