@@ -2,6 +2,7 @@
  * CourseContainer passes data to Course and QuestionListContainer
  */
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { findCourse, fetchUser, sendEmails } from '../../actions';
 import Loader from '../Loader';
@@ -40,15 +41,16 @@ class CourseContainer extends Component {
     this.setState({ open: false });
   }
 
-  handleSubmit() {
-    this.props.sendEmails(this.props.course._id);
+  async handleSubmit() {
+    await this.props.sendEmails(this.props.course._id);
     this.handleClose();
+    this.props.history.push('/courses');
   }
 
   // CourseID Depends on whether the user was redirected after creating a new
   // course or the user clicked a link in the dashboard or somewhere else in the app
   componentDidMount() {
-    if (this.props.course == undefined) {
+    if (this.props.course == undefined || this.props.course._id != this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id) {
       const courseID = this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id
       this.props.findCourse(courseID);
       this.props.fetchUser();
@@ -86,7 +88,6 @@ class CourseContainer extends Component {
 
     return <Loader />;
   }
-
 
 
   renderDialog() {
@@ -154,8 +155,8 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {
+export default withRouter(connect(mapStateToProps, {
   findCourse,
   fetchUser,
   sendEmails
-})(CourseContainer);
+})(CourseContainer));

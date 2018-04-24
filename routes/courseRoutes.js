@@ -23,7 +23,6 @@ module.exports = app => {
    */
   app.get('/api/course/:id', requireLogin, requireProfessor, async (req, res) => {
     const course = await Course.findById(req.params.id);
-
     if (!_.some(course.participants, req.user._id)) {
       course.participants.push(req.user._id);
       course.participants = _.uniqBy(course.participants);

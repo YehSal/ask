@@ -26,7 +26,10 @@ const courseSchema = new Schema({
   },
   questions: [QuestionSchema],
   participants: [Schema.Types.ObjectId],
-  sentQuestions: Boolean,
+  sentQuestions: {
+    type: Boolean,
+    default: false
+  },
   _user: { type: Schema.Types.ObjectId, ref: 'User' }
 });
 

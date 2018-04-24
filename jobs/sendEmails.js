@@ -30,7 +30,7 @@ module.exports = course => {
     const mailOptions = {
       from: 'QME',
       to: participant.email,
-      subject: 'Hello',
+      subject: `${course.title} Questions`,
       text: 'Hello World',
       html: html
     };

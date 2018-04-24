@@ -12,11 +12,12 @@ import {
 
 const renderContents = (courses) => {
   return courses.map(course => {
+    console.log(`${course.title}: /course/${course._id}`);
     return (
       <TableRow key={course._id}>
         <TableRowColumn>
           <Link to={{
-            pathname: `/course/{course._id}`,
+            pathname: `/course/${course._id}`,
             state: { courseID: course._id }
           }}>
             <h5 className="pageTitle">{course.title}</h5>
@@ -25,6 +26,7 @@ const renderContents = (courses) => {
         <TableRowColumn>{course.instructorName}</TableRowColumn>
         <TableRowColumn>{course.participants.length}</TableRowColumn>
         <TableRowColumn>{course.questions.length}</TableRowColumn>
+        <TableRowColumn>{course.sentQuestions ? 'Yes' : 'No'}</TableRowColumn>
       </TableRow>
     );
   });
@@ -38,8 +40,9 @@ const CourseList = ({ courses }) => {
           <TableRow>
             <TableHeaderColumn>Course Title</TableHeaderColumn>
             <TableHeaderColumn>Instructor</TableHeaderColumn>
-            <TableHeaderColumn>#Participants</TableHeaderColumn>
-            <TableHeaderColumn>#Questions</TableHeaderColumn>
+            <TableHeaderColumn># Participants</TableHeaderColumn>
+            <TableHeaderColumn># Questions</TableHeaderColumn>
+            <TableHeaderColumn>Questions Sent</TableHeaderColumn>
           </TableRow>
         </TableHeader>
         <TableBody displayRowCheckbox={true}>
