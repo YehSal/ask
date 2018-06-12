@@ -1,6 +1,7 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import RaisedButton from 'material-ui/RaisedButton';
+import './Landing.css';
 
 const Landing = ({ history }) => {
   return(

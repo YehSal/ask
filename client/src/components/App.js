@@ -8,6 +8,7 @@ import RoleForm from './roles/RoleForm';
 import ProfessorApp from './ProfessorApp';
 import StudentApp from './StudentApp';
 import Landing from './landing/Landing';
+import './App.css';
 
 class App extends Component {
   componentDidMount() {

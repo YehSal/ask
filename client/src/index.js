@@ -6,7 +6,7 @@ import { createStore, applyMiddleware } from 'redux';
 import reduxThunk from 'redux-thunk';
 import App from './components/App';
 import reducers from './reducers';
-import './styles/index.css'; // Customized styling
+// import './styles/index.css'; // Customized styling
 
 const store = createStore(reducers, {}, applyMiddleware(reduxThunk));
 

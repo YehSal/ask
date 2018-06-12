@@ -1,36 +1,27 @@
-/** {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}*/
+$color-primary: #5eb1bf;
+$color-secondary: #7fd7be;
+$color-header-primary: #fff;
 
-/*body {
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.7;
-  color: black;
-  padding: 30px;
-}*/
+$url-background-img: '/wallpaper.jpg';
 
-/*.header {
+.header {
   height: 95vh;
-  background-image: linear-gradient(to right bottom, rgba(94, 177, 191, 0.8), rgba(127, 215, 190, 0.8)), url("/wallpaper.jpg");
+  background-image: linear-gradient(to right bottom, rgba($color-primary, .8), rgba($color-secondary, .8)), url($url-background-img);
   background-size: cover;
   background-position: top;
   position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); }*/
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); }
 
-/*.text-box {
+.text-box {
   position: absolute;
   top: 35%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-}*/
+}
 
-/*.header-primary {
-  color: #fff;
+.header-primary {
+  color: $color-header-primary;
   text-transform: uppercase;
   backface-visibility: hidden;
   margin-bottom: 60px;
@@ -52,9 +43,9 @@
   font-weight: 700;
   letter-spacing: 12px;
   animation: moveInRight 1s ease-out;
-}*/
+}
 
-/*@keyframes moveInLeft {
+@keyframes moveInLeft {
   0% {
     opacity: 0;
     transform: translateX(-100px); }
@@ -90,47 +81,4 @@
 .btn-animated {
   animation: moveInBottom .5s ease-out .75s;
   animation-fill-mode: backwards;
-}*/
-
-.question-container {
-  padding-right: 40px;
-  margin-bottom: 10px;
-  background-color: #F5F5F5	;
-  text-align: 'center';
-  display: block;
-}
-
-.question-item {
-  position: relative;
-  text-align:'left';
-  word-wrap: break-word;
-}
-
-.question-upvote-btn {
-  max-width: 100px;
-  display: block;
-  position: relative;
-  margin-bottom: 4px;
-  top: 100%;
-  left: 95%;
-}
-
-.question-downvote-btn {
-  max-width: 100px;
-  display: block;
-  position: relative;
-  top: 100%;
-  left: 95%;
-}
-
-.question-delete-btn {
-  display: inline;
-  position: relative;
-  left: 50%;
-}
-
-.question-edit-btn {
-  position: relative;
-  display: inline;
-  left: 51%;
 }

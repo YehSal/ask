@@ -8,7 +8,7 @@
     "start": "node index.js",
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev": "npm-run-all -p server client",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
@@ -35,6 +35,7 @@
     "mongoose": "^5.0.7",
     "node-schedule": "^1.3.0",
     "nodemailer": "^4.6.4",
+    "npm-run-all": "^4.1.3",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "randomstring": "^1.1.5",

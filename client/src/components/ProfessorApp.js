@@ -5,6 +5,7 @@ import LandingProfessor from './landing/LandingProfessor';
 import Dashboard from './Dashboard';
 import CourseNew from './courses/CourseNew';
 import CourseContainer from './courses/CourseContainer';
+import './App.css';
 
 const ProfessorApp = () => {
   return (

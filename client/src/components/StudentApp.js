@@ -5,6 +5,7 @@ import LandingStudent from './landing/LandingStudent';
 import CourseNew from './courses/CourseNew';
 import CourseContainer from './courses/CourseContainer';
 import CourseJoin from './courses/CourseJoin';
+import './App.css';
 
 const StudentApp = () => {
   return (

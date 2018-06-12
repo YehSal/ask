@@ -22,3 +22,6 @@ yarn-error.log*
 
 # keys
 dev.js
+
+# css build files
+*.css
