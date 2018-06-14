@@ -1,0 +1,11 @@
+.btn {
+  &-landing {
+    margin: 10px;
+    width: 200px;
+  }
+
+  &-animated {
+    animation: moveInBottom .5s ease-out .75s;
+    animation-fill-mode: backwards;
+  }
+}

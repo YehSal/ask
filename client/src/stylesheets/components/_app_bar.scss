@@ -1,0 +1,8 @@
+// important allows us to override material ui
+.app-bar {
+  // background-color: gray !important;
+
+  &-title {
+    cursor: pointer;
+  }
+}
