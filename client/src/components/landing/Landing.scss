@@ -10,7 +10,33 @@ $url-background-img: '/wallpaper.jpg';
   background-size: cover;
   background-position: top;
   position: relative;
-  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%); }
+  clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+
+  &-primary {
+    color: $color-header-primary;
+    text-transform: uppercase;
+    backface-visibility: hidden;
+    margin-bottom: 60px;
+  }
+
+  &-primary-main {
+    display: block;
+    font-size: 60px;
+    font-weight: 400;
+    letter-spacing: 35px;
+    animation-name: moveInLeft;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+  }
+
+  &-primary-sub {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: 12px;
+    animation: moveInRight 1s ease-out;
+  }
+}
 
 .text-box {
   position: absolute;
@@ -18,31 +44,6 @@ $url-background-img: '/wallpaper.jpg';
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-}
-
-.header-primary {
-  color: $color-header-primary;
-  text-transform: uppercase;
-  backface-visibility: hidden;
-  margin-bottom: 60px;
-}
-
-.header-primary-main {
-  display: block;
-  font-size: 60px;
-  font-weight: 400;
-  letter-spacing: 35px;
-  animation-name: moveInLeft;
-  animation-duration: 1s;
-  animation-timing-function: ease-out;
-}
-
-.header-primary-sub {
-  display: block;
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: 12px;
-  animation: moveInRight 1s ease-out;
 }
 
 @keyframes moveInLeft {
@@ -53,7 +54,8 @@ $url-background-img: '/wallpaper.jpg';
     transform: translateX(10px); }
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(0); }
+  }
 
 @keyframes moveInRight {
   0% {
@@ -63,7 +65,8 @@ $url-background-img: '/wallpaper.jpg';
     transform: translateX(-10px); }
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(0); }
+  }
 
 @keyframes moveInBottom {
   0% {
@@ -71,14 +74,17 @@ $url-background-img: '/wallpaper.jpg';
     transform: translateY(30px); }
   100% {
     opacity: 1;
-    transform: translate(0); } }
+    transform: translate(0); }
+  }
 
-.btn-landing {
-  margin: 10px;
-  width: 200px;
-}
+.btn {
+  &-landing {
+    margin: 10px;
+    width: 200px;
+  }
 
-.btn-animated {
-  animation: moveInBottom .5s ease-out .75s;
-  animation-fill-mode: backwards;
+  &-animated {
+    animation: moveInBottom .5s ease-out .75s;
+    animation-fill-mode: backwards;
+  }
 }
