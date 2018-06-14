@@ -42,5 +42,8 @@
     "recompose": "^0.26.0",
     "socket.io": "^2.0.4",
     "typeface-roboto": "0.0.54"
+  },
+  "devDependencies": {
+    "react-router-role-authorization": "^1.1.4"
   }
 }

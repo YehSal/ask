@@ -3,10 +3,10 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import RaisedButton from 'material-ui/RaisedButton';
 import Done from 'material-ui/svg-icons/action/done';
-import RoleField from './RoleField';
+import LandingRoleField from './LandingRoleField';
 import { chooseRole } from '../../actions';
 
-class RoleForm extends Component {
+class LandingRoleForm extends Component {
   constructor(props) {
     super(props);
 
@@ -19,20 +19,20 @@ class RoleForm extends Component {
         <Field
           type="radio"
           name="userRole"
-          component={RoleField}
+          component={LandingRoleField}
         />
       </div>
     );
   }
 
   submitHandler() {
-    console.log(this.props);
     this.props.chooseRole(this.props.formValues);
   }
 
   render() {
     return (
       <div>
+        Are you a student or an instructor?
         <form onSubmit={this.props.handleSubmit(this.submitHandler)}>
           {this.renderFields()}
           <RaisedButton
@@ -49,11 +49,10 @@ class RoleForm extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state);
-  return { formValues: state.form.roleForm ? state.form.roleForm.values : false };
+  return { formValues: state.form.landingRoleForm ? state.form.landingRoleForm.values : false };
 }
 
 export default reduxForm({
-  form: 'roleForm',
+  form: 'landingRoleForm',
   destroyOnUnmount: false
-})(connect(mapStateToProps, { chooseRole })(RoleForm));
+})(connect(mapStateToProps, { chooseRole })(LandingRoleForm));
