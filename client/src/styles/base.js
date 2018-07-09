@@ -1,3 +1,5 @@
+// Refactor all of this into scss
+
 export const hOneStyleGreen = {
   margin: '5px 5px 10px 5px',
 	padding: '15px 5px 15px 5px',

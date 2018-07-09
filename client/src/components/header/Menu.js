@@ -4,7 +4,7 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
-const MenuProfessor = ({ dashboardHandler, history }) => {
+const Menu = ({ onClickHandler, menuItemTitle, history }) => {
   return (
     <IconMenu
       iconButtonElement={<IconButton><MoreVertIcon /></IconButton>}
@@ -12,8 +12,8 @@ const MenuProfessor = ({ dashboardHandler, history }) => {
       anchorOrigin={{horizontal: 'right', vertical: 'top'}}
     >
       <MenuItem
-        primaryText="Dashboard"
-        onClick={dashboardHandler}
+        primaryText={menuItemTitle}
+        onClick={onClickHandler}
       />
       <MenuItem
         primaryText="Sign out"
@@ -23,4 +23,4 @@ const MenuProfessor = ({ dashboardHandler, history }) => {
   );
 }
 
-export default MenuProfessor;
+export default Menu;

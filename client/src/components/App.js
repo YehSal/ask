@@ -3,20 +3,19 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { compose } from 'recompose';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import HeaderProfessor from './header/HeaderProfessor';
-import ProfessorApp from './ProfessorApp';
-import StudentApp from './StudentApp';
 import Dashboard from './Dashboard';
 import CourseJoin from './courses/CourseJoin';
 import CourseNew from './courses/CourseNew';
 
+import HeaderContainer from './header/HeaderContainer';
 import Landing from './landing/Landing';
 
 import RestrictedComponent from './RestrictedComponent';
 import * as actions from '../actions';
 import { withEither } from '../helpers/withEither';
 import { isStudent, isProfessor, isUnregistered } from '../helpers/userHelpers';
-import './App.css';
+
+import '../stylesheets/main.css';
 
 // TODO: Refactor Header component as Landing
 class App extends Component {
@@ -30,7 +29,7 @@ class App extends Component {
         <div>
           <BrowserRouter>
             <div>
-              <HeaderProfessor />
+              <HeaderContainer user={this.props.user}/>
               <Route exact path="/" render={ props => <Landing user={this.props.user} />} />
               <Route exact path="/courses" render={props => this.props.user && isProfessor(this.props.user) ? <Dashboard /> : <RestrictedComponent />} />
               <Route exact path="/courses/new" render={props => this.props.user && isProfessor(this.props.user) ? <CourseNew /> : <RestrictedComponent />} />

@@ -3,7 +3,6 @@ import { withRouter } from 'react-router-dom';
 import { isStudent, isProfessor, isUnregistered } from '../../helpers/userHelpers';
 import RaisedButton from 'material-ui/RaisedButton';
 import LandingRoleForm from './LandingRoleForm';
-import './Landing.css';
 
 const btnConditionalRendering = (user, history) => {
   if (isStudent(user)) {
