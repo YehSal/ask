@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import { isStudent, isProfessor, isUnregistered } from '../../helpers/userHelpers';
 import RaisedButton from 'material-ui/RaisedButton';
 import LandingRoleForm from './LandingRoleForm';
+import About from './About';
 
 const btnConditionalRendering = (user, history) => {
   if (isStudent(user)) {
@@ -45,22 +46,25 @@ const btnConditionalRendering = (user, history) => {
   return null;
 };
 
-const Landing = ({ history, user }) => {
+const Landing = ({ user, history }) => {
   return (
-    <div className="header">
-      <div className="text-box">
-        <h1 className="header-primary">
-          <span className="header-primary-main">
-            QME
-          </span>
-          <span className="header-primary-sub">
-            the best way to ask questions
-          </span>
-        </h1>
-        {btnConditionalRendering(user, history)}
+    <div>
+      <div className="header">
+        <div className="text-box">
+          <h1 className="header-primary">
+            <span className="header-primary-main">
+              QME
+            </span>
+            <span className="header-primary-sub">
+              the best way to ask questions
+            </span>
+          </h1>
+          {btnConditionalRendering(user, history)}
+        </div>
       </div>
+      <About />
     </div>
   );
 };
 
-export default Landing;
+export default withRouter(Landing);

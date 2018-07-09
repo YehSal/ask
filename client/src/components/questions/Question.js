@@ -7,7 +7,7 @@ import ThumbUp from 'material-ui/svg-icons/action/thumb-up';
 import ThumbDown from 'material-ui/svg-icons/action/thumb-down';
 import Dialog from 'material-ui/Dialog';
 import { ButtonStyle } from '../../styles/base';
-import '../../styles/index.css';
+// import '../../styles/index.css';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import Clear from 'material-ui/svg-icons/content/clear';
 import Edit from 'material-ui/svg-icons/content/create';

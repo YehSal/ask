@@ -50,7 +50,6 @@ class CourseContainer extends Component {
   // CourseID Depends on whether the user was redirected after creating a new
   // course or the user clicked a link in the dashboard or somewhere else in the app
   componentDidMount() {
-    console.log(this.props);
     if (this.props.course == undefined || this.props.course._id != this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id) {
       const courseID = this.props.location.state ? this.props.location.state.courseID : this.props.match.params.id
       this.props.findCourse(courseID);

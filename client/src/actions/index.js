@@ -37,10 +37,13 @@ const socket = io(socketURI);
 * COURSE ACTIONS
 */
 export const createCourse = (values, history) => async dispatch => {
+  console.log(history);
+
   const res = await axios.post('/api/courses', values);
   const courseID = res.data._id;
 
   await dispatch({ type: FIND_COURSE, payload: res.data });
+
 
   history.push({
     pathname: `/course/${courseID}`,
